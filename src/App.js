@@ -25,7 +25,7 @@ const reducer = (state, action) => {
         currentRender.count += 1
       }
       else {
-        renderCounts.push({ keyName: action.keyName, description: action.description, count: 1})
+        renderCounts.push({ keyName: action.keyName, description: action.description, number: action.number, count: 1})
       }
       return { ...state, renderCounts, recentRender: [ ...state.recentRender, action.keyName ] };
     case REMOVE_RECENT:

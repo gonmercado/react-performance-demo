@@ -28,7 +28,7 @@ class ParentWithState extends React.PureComponent {
   render() {
     console.log('Render - Parent with state');
     const { renderCountsDispatch } = this.props;
-    renderCountsDispatch({ type: INCREMENT_RENDER_COUNT, keyName: 'Parent'});
+    renderCountsDispatch({ type: INCREMENT_RENDER_COUNT, keyName: 'Parent', number: 'Parent'});
     const { sharedCount, localCount } = this.state;
 
     return (

@@ -15,7 +15,7 @@ const RenderAudit = ({ renderCounts, renderCountsDispatch }) => {
               <CartesianGrid strokeDasharray="3 3" />
               <Tooltip />
               <XAxis type="number" />
-              <YAxis type="category" dataKey="keyName" />
+              <YAxis type="category" dataKey="number" />
               <Bar dataKey="count" fill="#8884d8">
                 {
                   renderCounts.map((entry, index) => (
