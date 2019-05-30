@@ -1,12 +1,16 @@
 import React from 'react';
-import { INCREMENT_RENDER_COUNT } from '../../App';
+import HighlightChildren from '../shared/highlightChildren';
+import { callDispatchOnRender } from '../../shared/auditRenderHelper';
 
 const FunctionComponent = ({ renderCountsDispatch }) => {
-  console.log('4 - Function component without state');
-  renderCountsDispatch({ type: INCREMENT_RENDER_COUNT, keyName: 'comp4'});
+  const keyName = 'comp4';
+  const description = '4 - Function component without state';
+
+  callDispatchOnRender(renderCountsDispatch, keyName, description);
   return (
-    <div>
-      <h3>4 - Function component without state</h3>
+    <div className={ 'children' }>
+      <h3>{ description }</h3>
+      <HighlightChildren keyName={ keyName } />
     </div>
   );
 };

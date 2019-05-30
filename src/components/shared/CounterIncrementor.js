@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const CounterIncrementor = ({ name, counter, onCounterIncrement }) => {
+
   return (
     <div>
       <button onClick={ () => onCounterIncrement(name) }>{ `Increment ${ name }` }</button><p>{ counter }</p>

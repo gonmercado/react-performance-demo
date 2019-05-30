@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { INCREMENT_RENDER_COUNT } from '../../App';
+import HighlightChildren from '../shared/highlightChildren';
+import { callDispatchOnRender } from '../../shared/auditRenderHelper';
 
 const FunctionComponentWithProps = ({ parentProp, renderCountsDispatch }) => {
-  console.log('15 - Function component with props');
-  renderCountsDispatch({ type: INCREMENT_RENDER_COUNT, keyName: 'comp15'});
+  const keyName = 'comp15';
+  const description = '15 - Function component with props';
+
+  callDispatchOnRender(renderCountsDispatch, keyName, description);
   return (
-    <div>
-      <h3>15 - Function component with props</h3>
+    <div className={ 'children' }>
+      <h3>{ description }</h3>
       <div><p>{`Parent Counter - ${ parentProp }`}</p></div>
+      <HighlightChildren keyName={ keyName } />
     </div>
   );
 };
