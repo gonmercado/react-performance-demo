@@ -26,8 +26,8 @@ class ClassComponentWithStateAndProps extends React.Component {
         <div className={ 'button-container'}>
           <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
           <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
-          <div><p>{`Parent - ${ this.props.parentProp }`}</p></div>
         </div>
+        <div><p>{`Parent - ${ this.props.parentProp }`}</p></div>
         <HighlightChildren keyName={ this.keyName } />
       </div>
     );

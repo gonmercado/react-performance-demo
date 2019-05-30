@@ -20,8 +20,8 @@ const MemoFunctionComponentsWithProps = ({ parentProp, renderCountsDispatch }) =
       <div className={ 'button-container'}>
         <CounterIncrementor onCounterIncrement={ () => setCounter( count + 1) } count={ count } name={ 'count' }/>
         <CounterIncrementor onCounterIncrement={ () => setHiddenCounter( hiddenCount + 1) } name={ 'hiddenCount' }/>
-        <div><p>{`Parent - ${ parentProp }`}</p></div>
       </div>
+      <div><p>{`Parent - ${ parentProp }`}</p></div>
       <HighlightChildren keyName={ keyName } />
     </div>
   );

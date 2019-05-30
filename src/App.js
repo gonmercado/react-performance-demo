@@ -1,7 +1,8 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import './App.css';
 import ParentWithState from './components/ParentWithState';
 import RenderAudit from './components/RenderAudit';
+import SettingsPanel from './components/SettingsPanel';
 
 export const renderContext = React.createContext();
 
@@ -32,19 +33,27 @@ const reducer = (state, action) => {
       const pos = state.recentRender.indexOf(action.keyName);
       return { ...state, recentRender: [ ...state.recentRender.slice(0, pos), ...state.recentRender.slice(pos + 1)] }
     case RESET_COUNT:
-      return { ...initialState }
+      return { ...initialState };
     default:
       throw new Error()
   }
 };
 
 const App = () => {
-    const [ renderCountsState, renderCountsDispatch ] = useReducer(reducer, initialState);
+  const [ renderCountsState, renderCountsDispatch ] = useReducer(reducer, initialState);
+  const [  displayBarChart, setDisplayVarChart ] = useState(true);
+
+  const handleDisplayBarChartClick = () => setDisplayVarChart(!displayBarChart);
   return (
     <renderContext.Provider value={ { recentRender: renderCountsState.recentRender, renderCountsDispatch } }>
       <div className="App">
-        <ParentWithState renderCountsDispatch={ renderCountsDispatch } />
-        <RenderAudit renderCounts={ renderCountsState.renderCounts } renderCountsDispatch={ renderCountsDispatch } />
+        <div className="app-main-content">
+          <div className="app-left-panel">
+            <ParentWithState renderCountsDispatch={ renderCountsDispatch } />
+            <SettingsPanel displayBarChart={ displayBarChart } onDisplayBarChartClick={ handleDisplayBarChartClick } />
+          </div>
+          { displayBarChart && <RenderAudit renderCounts={ renderCountsState.renderCounts } renderCountsDispatch={ renderCountsDispatch } /> }
+        </div>
       </div>
     </renderContext.Provider>
   );

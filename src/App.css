@@ -1,15 +1,23 @@
 .App {
+}
+
+.app-main-content {
     display: flex;
+}
+
+.app-left-panel {
+    flex: 2;
+    position: relative;
+    border-bottom: 1px solid darkgray;
 }
 
 .App p {
     display: inline-block;
-    margin: 0 20px;
+    margin: 0 20px 5px 20px;
 }
 
 .parent {
-    flex: 2;
-    border-bottom: 1px solid darkgray;
+
 }
 
 .parent-title {
@@ -31,7 +39,7 @@
 }
 
 .render-audit {
-    min-width: 400px;
+    min-width: 350px;
     flex: 1;
     border-left: 1px solid darkgray;
     padding: 10px;
@@ -69,7 +77,7 @@
 .children h3 {
     color: #333;
     margin: 0;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
 }
 
@@ -88,7 +96,7 @@
 }
 
 .App button {
-    min-width: 100px;
+    min-width: 90px;
     margin: 5px 0;
 }
 
@@ -103,15 +111,23 @@
     margin-right: 5px;
 }
 
+.counter-incrementer button {
+    display: inline-block;
+}
+
+.counter-incrementer p {
+    margin: 5px;
+}
+
 .title-panel {
     display: flex;
     height: 30px;
     border-bottom: 1px solid lightgray;
-    background-color: #efefef;
+    background-color: #d7f3d7;
 }
 
 .title-panel h3 {
-    padding-left: 10px;
+    padding-left: 5px;
     margin-top: 3px;
 }
 
@@ -128,6 +144,25 @@
     font-size: 14px;
 }
 
-@media only screen and (max-width: 600px)  {
+.settings-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+    border-radius: 3px;
+    background-color: white;
+    padding: 5px;
+}
 
+@media only screen and (max-width: 1050px)  {
+    .title-panel h3 {
+        padding-left: 0;
+    }
+
+    .children-group {
+        flex: 1;
+        margin: 5px;
+        border: 1px solid darkgray;
+        background-color: #f6f6f6;
+    }
 }
