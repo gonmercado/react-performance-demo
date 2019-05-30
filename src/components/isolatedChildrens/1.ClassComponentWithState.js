@@ -3,6 +3,7 @@ import CounterIncrementor from '../shared/CounterIncrementor';
 import HighlightChildren from '../shared/highlightChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
 import ComponentTitlePanel from '../shared/componentTitlePanel';
+import { displayComponentMeta } from '../../shared/componentsMetaData';
 
 class ClassComponentWithState extends React.Component {
   state = {
@@ -11,7 +12,7 @@ class ClassComponentWithState extends React.Component {
   };
   keyName = 'comp1';
   number = 1;
-  description = 'Class with state';
+  description = displayComponentMeta.find(el => el.keyName === this.keyName).description;
 
   handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
 

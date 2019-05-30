@@ -3,6 +3,7 @@ import CounterIncrementor from '../shared/CounterIncrementor';
 import HighlightChildren from '../shared/highlightChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
 import ComponentTitlePanel from '../shared/componentTitlePanel';
+import { displayComponentMeta } from '../../shared/componentsMetaData';
 
 class ClassComponentWithShouldUpdate extends React.Component {
   state = {
@@ -11,7 +12,7 @@ class ClassComponentWithShouldUpdate extends React.Component {
   };
   keyName = 'comp3';
   number = 3;
-  description = 'Class with should update'
+  description = displayComponentMeta.find(el => el.keyName === this.keyName).description;
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     return (nextState.count !== this.state.count);

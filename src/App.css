@@ -56,13 +56,25 @@
 .children-group h2 {
     color: #444;
     font-weight: 500;
-    background-color: #d3ddfa;
     margin: 0;
     padding: 3px 10px;
 }
 
 .children-container {
     padding: 10px;
+    display: flex;
+}
+
+.children-title {
+    background-color: #d3ddfa;
+}
+
+.children-title input {
+    margin-left: 13px
+}
+
+.children-title h2 {
+    display: inline-block;
 }
 
 .children {
@@ -72,6 +84,7 @@
     margin-bottom: 8px;
     background-color: #fff;
     box-shadow: 1px 1px 3px #666;
+    flex: 1;
 }
 
 .children h3 {

@@ -9,7 +9,7 @@ const RenderAudit = ({ renderCounts, renderCountsDispatch }) => {
     <div className={ 'render-audit' }>
       <button onClick={ () => renderCountsDispatch({ type: RESET_COUNT }) }>Reset</button>
       {
-        renderCounts.length > 0 &&
+        renderCounts.sort((a,b) => a.number - b.number ).length > 0 &&
           <ResponsiveContainer width='100%' height={ 500 }>
             <BarChart width={ 300 } height={ 500 } layout="vertical" data={ renderCounts }>
               <CartesianGrid strokeDasharray="3 3" />

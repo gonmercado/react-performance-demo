@@ -1,34 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ClassComponentWithState from './isolatedChildrens/1.ClassComponentWithState';
-import PureClassComponentWithState from './isolatedChildrens/2.PureClassComponentWithState';
-import ClassComponentWithShouldUpdate from './isolatedChildrens/3.ClassComponentWithShouldUpdate';
-import FunctionComponent from './isolatedChildrens/4.FunctionComponent';
-import MemoFunctionComponent from './isolatedChildrens/5.MemoFunctionComponent';
-import ClassComponentWithStateAndProps from './sharedDataChildrens/11.ClassComponentWithStateAndProps';
-import PureClassComponentWithProps from './sharedDataChildrens/12.PureClassComponentWithProps';
-import ClassComponentWithPropsAndShouldUpdate from './sharedDataChildrens/13.ClassComponentWithPropsAndShouldUpdate';
-import FunctionComponentWithProps from './sharedDataChildrens/15.FunctionComponentWithProps';
-import MemoFunctionComponentsWithProps from './sharedDataChildrens/16.MemoFunctionComponentsWithProps';
 import CounterIncrementor from './shared/CounterIncrementor';
-import MemoFunctionComponentsWithPropsAndHooks from './sharedDataChildrens/17.MemoFunctionComponentsWithPropsAndHooks';
-import ClassComponentWithPropsAndShouldUpdateAndChildren
-  from './sharedDataChildrens/14.ClassComponentWithPropsAndShouldUpdateAndChildren';
-import { INCREMENT_RENDER_COUNT } from '../App';
+import { INCREMENT_RENDER_COUNT, RESET_COUNT } from '../App';
+import { displayComponentMeta, displayComponentWithPropsMeta } from '../shared/componentsMetaData';
 
 class ParentWithState extends React.PureComponent {
   state = {
     sharedCount: 0,
     localCount: 0,
     hiddenCount: 0,
+    displayComponent: displayComponentMeta.map(el => ({ ...el, show: false })),
+    displayComponentWithProps: displayComponentWithPropsMeta.map(el => ({ ...el, show: false })),
+    displayAllComponents: false,
+    displayAllComponentsWithState: false
   };
 
   handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
 
+  handleDisplayCompClick = pos => {
+    this.props.renderCountsDispatch({ type: RESET_COUNT });
+    this.setState(oldState => {
+      const displayComponent = oldState.displayComponent.map(el => ({ ...el }));
+      displayComponent[pos].show = !displayComponent[pos].show;
+      return ({ displayComponent });
+    })
+  };
+
+  handleDisplayCompWithPropsClick = pos => {
+    this.setState(oldState => {
+      const displayComponentWithProps = oldState.displayComponentWithProps.map(el => ({ ...el }));
+      displayComponentWithProps[pos].show = !displayComponentWithProps[pos].show;
+      return ({ displayComponentWithProps });
+    })
+  };
+
+  handleDisplayAllComponents = () => {
+    this.setState(oldState => ({
+      displayAllComponents: !oldState.displayAllComponents,
+      displayComponent: oldState.displayComponent.map(el => ({ ...el, show: !oldState.displayAllComponents }))
+    }));
+  };
+
+  handleDisplayAllComponentsWithProps = () => {
+    this.setState(oldState => ({
+      displayAllComponentsWithState: !oldState.displayAllComponentsWithState,
+      displayComponentWithProps: oldState.displayComponentWithProps.map(el => ({ ...el, show: !oldState.displayAllComponentsWithState }))
+    }));
+  };
+
   render() {
     console.log('Render - Parent with state');
     const { renderCountsDispatch } = this.props;
-    renderCountsDispatch({ type: INCREMENT_RENDER_COUNT, keyName: 'Parent', number: 'P'});
+    renderCountsDispatch({ type: INCREMENT_RENDER_COUNT, keyName: 'Parent', number: 0});
     const { sharedCount, localCount } = this.state;
 
     return (
@@ -44,26 +67,34 @@ class ParentWithState extends React.PureComponent {
         </div>
         <div className={ 'parent-container'}>
           <div className={ 'children-group' }>
-            <h2>Childrens without props</h2>
-            <div className={ 'children-container' }>
-              <ClassComponentWithState renderCountsDispatch={ renderCountsDispatch } />
-              <PureClassComponentWithState renderCountsDispatch={ renderCountsDispatch } />
-              <ClassComponentWithShouldUpdate renderCountsDispatch={ renderCountsDispatch } />
-              <FunctionComponent renderCountsDispatch={ renderCountsDispatch } />
-              <MemoFunctionComponent renderCountsDispatch={ renderCountsDispatch } />
+            <div className={ 'children-title' }>
+              <input type="checkbox" checked={ this.state.displayAllComponents } onChange={ this.handleDisplayAllComponents } />
+              <h2>Childrens without props</h2>
             </div>
+            {
+              this.state.displayComponent.map((element, index) => (
+                <div className={ 'children-container'} key={ index }>
+                  <input type="checkbox" checked={ element.show } onChange={ () => this.handleDisplayCompClick(index) }/> { !element.show && <label>{ element.description }</label> }
+                  {
+                    element.show && <element.component renderCountsDispatch={renderCountsDispatch} />
+                  }
+                </div>
+              ))
+            }
           </div>
           <div className={ 'children-group' }>
-            <h2>Childrens with parents props</h2>
-            <div className={ 'children-container' }>
-              <ClassComponentWithStateAndProps parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
-              <PureClassComponentWithProps parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
-              <ClassComponentWithPropsAndShouldUpdate parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
-              <ClassComponentWithPropsAndShouldUpdateAndChildren parentProp={ sharedCount} renderCountsDispatch={ renderCountsDispatch } />
-              <FunctionComponentWithProps parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
-              <MemoFunctionComponentsWithProps parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
-              <MemoFunctionComponentsWithPropsAndHooks parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
+            <div className={ 'children-title' }>
+              <input type="checkbox" checked={ this.state.displayAllComponentsWithState } onChange={ this.handleDisplayAllComponentsWithProps } />
+              <h2>Childrens with parents props</h2>
             </div>
+            {
+              this.state.displayComponentWithProps.map((element, index) => (
+                <div className={ 'children-container'} key={ index }>
+                  <input type="checkbox" checked={element.show} onChange={() => this.handleDisplayCompWithPropsClick(index)} />{ !element.show && <label>{ element.description }</label> }
+                  {element.show && <element.component parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />}
+                </div>
+              ))
+            }
           </div>
         </div>
       </div>

@@ -2,11 +2,12 @@ import React from 'react';
 import HighlightChildren from '../shared/highlightChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
 import ComponentTitlePanel from '../shared/componentTitlePanel';
+import { displayComponentMeta } from '../../shared/componentsMetaData';
 
 const FunctionComponent = ({ renderCountsDispatch }) => {
   const keyName = 'comp4';
   const number = 4;
-  const description = 'Function without state';
+  const { description } = displayComponentMeta.find(el => el.keyName === keyName);
 
   callDispatchOnRender(renderCountsDispatch, keyName, description, number);
   return (
