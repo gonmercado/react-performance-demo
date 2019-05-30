@@ -18,9 +18,9 @@ import { INCREMENT_RENDER_COUNT } from '../App';
 
 class ParentWithState extends React.PureComponent {
   state = {
-    sharedCounter: 0,
-    localCounter: 0,
-    hiddenCounter: 0,
+    sharedCount: 0,
+    localCount: 0,
+    hiddenCount: 0,
   };
 
   handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
@@ -29,15 +29,17 @@ class ParentWithState extends React.PureComponent {
     console.log('Render - Parent with state');
     const { renderCountsDispatch } = this.props;
     renderCountsDispatch({ type: INCREMENT_RENDER_COUNT, keyName: 'Parent'});
-    const { sharedCounter, localCounter } = this.state;
+    const { sharedCount, localCount } = this.state;
 
     return (
-      <>
+      <div className={ 'parent' }>
         <div className={ 'parent-title' }>
           <h1>Parent component</h1>
-          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } counter={ sharedCounter } name={ 'sharedCounter' }/>
-          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } counter={ localCounter } name={ 'localCounter' }/>
-          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCounter' }/>
+          <div className={ 'button-container'}>
+            <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ sharedCount } name={ 'sharedCount' }/>
+            <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ localCount } name={ 'localCount' }/>
+            <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
+          </div>
 
         </div>
         <div className={ 'parent-container'}>
@@ -45,36 +47,26 @@ class ParentWithState extends React.PureComponent {
             <h2>Childrens without props</h2>
             <div className={ 'children-container' }>
               <ClassComponentWithState renderCountsDispatch={ renderCountsDispatch } />
-              <hr/>
               <PureClassComponentWithState renderCountsDispatch={ renderCountsDispatch } />
-              <hr />
               <ClassComponentWithShouldUpdate renderCountsDispatch={ renderCountsDispatch } />
-              <hr />
               <FunctionComponent renderCountsDispatch={ renderCountsDispatch } />
-              <hr />
               <MemoFunctionComponent renderCountsDispatch={ renderCountsDispatch } />
             </div>
           </div>
           <div className={ 'children-group' }>
             <h2>Childrens with parents props</h2>
             <div className={ 'children-container' }>
-              <ClassComponentWithStateAndProps parentProp={ sharedCounter } renderCountsDispatch={ renderCountsDispatch } />
-              <hr/>
-              <PureClassComponentWithProps parentProp={ sharedCounter } renderCountsDispatch={ renderCountsDispatch } />
-              <hr />
-              <ClassComponentWithPropsAndShouldUpdate parentProp={ sharedCounter } renderCountsDispatch={ renderCountsDispatch } />
-              <hr />
-              <ClassComponentWithPropsAndShouldUpdateAndChildren parentProp={ sharedCounter} renderCountsDispatch={ renderCountsDispatch } />
-              <hr />
-              <FunctionComponentWithProps parentProp={ sharedCounter } renderCountsDispatch={ renderCountsDispatch } />
-              <hr />
-              <MemoFunctionComponentsWithProps parentProp={ sharedCounter } renderCountsDispatch={ renderCountsDispatch } />
-              <hr />
-              <MemoFunctionComponentsWithPropsAndHooks parentProp={ sharedCounter } renderCountsDispatch={ renderCountsDispatch } />
+              <ClassComponentWithStateAndProps parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
+              <PureClassComponentWithProps parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
+              <ClassComponentWithPropsAndShouldUpdate parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
+              <ClassComponentWithPropsAndShouldUpdateAndChildren parentProp={ sharedCount} renderCountsDispatch={ renderCountsDispatch } />
+              <FunctionComponentWithProps parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
+              <MemoFunctionComponentsWithProps parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
+              <MemoFunctionComponentsWithPropsAndHooks parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
             </div>
           </div>
         </div>
-      </>
+      </div>
     )
   }
 }

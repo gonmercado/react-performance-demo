@@ -1,15 +1,17 @@
 import React from 'react';
 import HighlightChildren from '../shared/highlightChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
+import ComponentTitlePanel from '../shared/componentTitlePanel';
 
 const FunctionComponent = ({ renderCountsDispatch }) => {
   const keyName = 'comp4';
-  const description = '4 - Function component without state';
+  const number = 4;
+  const description = 'Function without state';
 
-  callDispatchOnRender(renderCountsDispatch, keyName, description);
+  callDispatchOnRender(renderCountsDispatch, keyName, description, number);
   return (
     <div className={ 'children' }>
-      <h3>{ description }</h3>
+      <ComponentTitlePanel title={ description } number={ number }/>
       <HighlightChildren keyName={ keyName } />
     </div>
   );

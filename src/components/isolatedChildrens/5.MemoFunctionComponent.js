@@ -1,15 +1,17 @@
 import React from 'react';
 import HighlightChildren from '../shared/highlightChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
+import ComponentTitlePanel from '../shared/componentTitlePanel';
 
 const MemoFunctionComponent = ({ renderCountsDispatch }) => {
   const keyName = 'comp5';
-  const description = '5 - Memo function component without state';
+  const number = 5;
+  const description = 'Memo function without state';
 
-  callDispatchOnRender(renderCountsDispatch, keyName, description);
+  callDispatchOnRender(renderCountsDispatch, keyName, description, number);
   return (
     <div className={ 'children' }>
-      <h3>{ description }</h3>
+      <ComponentTitlePanel title={ description } number={ number }/>
       <HighlightChildren keyName={ keyName } />
     </div>
   );

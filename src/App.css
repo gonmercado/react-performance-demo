@@ -1,5 +1,5 @@
 .App {
-
+    display: flex;
 }
 
 .App p {
@@ -7,25 +7,50 @@
     margin: 0 20px;
 }
 
+.parent {
+    flex: 2;
+    border-bottom: 1px solid darkgray;
+}
+
 .parent-title {
     background-color: lightgray;
-    padding: 15px;
+    padding: 10px;
+    box-shadow: 0 4px 2px -2px gray;
+}
+
+.parent-title h1 {
+    color: #444;
+    font-weight: 500;
+    margin: 0 0 5px 0;
+    line-height: 18px;
 }
 
 .parent-container {
     display: flex;
+    flex-wrap: wrap;
+}
+
+.render-audit {
+    min-width: 400px;
+    flex: 1;
+    border-left: 1px solid darkgray;
+    padding: 10px;
+    border-bottom: 1px solid darkgray;
 }
 
 .children-group {
     flex: 1;
-    margin: 15px;
+    margin: 10px;
     border: 1px solid darkgray;
+    background-color: #f6f6f6;
 }
 
 .children-group h2 {
-    background-color: antiquewhite;
-    margin: 0 0 15px 0;
-    padding: 10px;
+    color: #444;
+    font-weight: 500;
+    background-color: #d3ddfa;
+    margin: 0;
+    padding: 3px 10px;
 }
 
 .children-container {
@@ -34,6 +59,18 @@
 
 .children {
     position: relative;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    background-color: #fff;
+    box-shadow: 1px 1px 3px #666;
+}
+
+.children h3 {
+    color: #333;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .highlight-children {
@@ -51,6 +88,46 @@
 }
 
 .App button {
-    min-width: 200px;
+    min-width: 100px;
     margin: 5px 0;
+}
+
+.button-container {
+    display: flex;
+    padding: 5px;
+}
+
+.counter-incrementer {
+    border: 1px solid darkgray;
+    padding: 0 5px;
+    margin-right: 5px;
+}
+
+.title-panel {
+    display: flex;
+    height: 30px;
+    border-bottom: 1px solid lightgray;
+    background-color: #efefef;
+}
+
+.title-panel h3 {
+    padding-left: 10px;
+    margin-top: 3px;
+}
+
+.title-panel__number {
+    background-color: #707070;
+    box-sizing: border-box;
+    padding-top: 2px;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    margin: 3px 0 0 3px;
+    text-align: center;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 600px)  {
+
 }

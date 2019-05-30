@@ -3,24 +3,28 @@ import PropTypes from 'prop-types';
 import CounterIncrementor from '../shared/CounterIncrementor';
 import HighlightChildren from '../shared/highlightChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
+import ComponentTitlePanel from '../shared/componentTitlePanel';
 
 const MemoFunctionComponentsWithPropsAndHooks = ({ parentProp, renderCountsDispatch }) => {
-  const [ counter, setCounter ] = useState(0);
-  const [ hiddenCounter, setHiddenCounter ] = useState(0);
+  const [ count, setCounter ] = useState(0);
+  const [ hiddenCount, setHiddenCounter ] = useState(0);
 
   const keyName = 'comp17';
-  const description = '17 - Memo function component with props and hooks';
+  const number = 17;
+  const description = 'Memo function with props and hooks';
 
-  callDispatchOnRender(renderCountsDispatch, keyName, description);
+  callDispatchOnRender(renderCountsDispatch, keyName, description, number);
   const renderCounters = useMemo( () =>
       <div className={ 'children' }>
-        <h3>{ description }</h3>
-        <CounterIncrementor onCounterIncrement={ () => setCounter( counter + 1) } counter={ counter } name={ 'counter' }/>
-        <CounterIncrementor onCounterIncrement={ () => setHiddenCounter( hiddenCounter + 1) } name={ 'hiddenCounter' }/>
-        <div><p>{`Parent Counter - ${ parentProp }`}</p></div>
+        <ComponentTitlePanel title={ description } number={ number }/>
+        <div className={ 'button-container'}>
+          <CounterIncrementor onCounterIncrement={ () => setCounter( count + 1) } count={ count } name={ 'count' }/>
+          <CounterIncrementor onCounterIncrement={ () => setHiddenCounter( hiddenCount + 1) } name={ 'hiddenCount' }/>
+          <div><p>{`Parent - ${ parentProp }`}</p></div>
+        </div>
         <HighlightChildren keyName={ keyName } />
       </div>,
-    [ counter, parentProp ] //eslint-disable-line
+    [ count, parentProp ] //eslint-disable-line
   );
 
   return renderCounters;

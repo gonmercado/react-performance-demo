@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { callDispatchOnRender } from '../../../shared/auditRenderHelper';
+import ComponentTitlePanel from '../../shared/componentTitlePanel';
 
 class AnotherChildren extends React.Component {
-  render() {
-    console.log('21 - Render - Grand Children component');
+  keyName = 'comp21';
+  number = 21;
+  description = 'Class with props';
 
+  render() {
+    callDispatchOnRender(this.props.renderCountsDispatch, this.keyName, this.description, this.number);
     return (
       <div>
-        <h3>21 - Grand Children component</h3>
-        <div><p>{`Grand Parent Counter - ${ this.props.grandParentProp }`}</p></div>
+        <ComponentTitlePanel title={ this.description } number={ this.number }/>
+        <div><p>{`Grand Parent - ${ this.props.grandParentProp }`}</p></div>
       </div>
     );
   }
