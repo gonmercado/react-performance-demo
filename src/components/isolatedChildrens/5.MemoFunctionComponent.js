@@ -6,8 +6,7 @@ import { childrenComponentsMeta } from '../../shared/componentsMetaData';
 
 const MemoFunctionComponent = ({ renderCountsDispatch }) => {
   const keyName = 'comp5';
-  const number = 5;
-  const { description } = childrenComponentsMeta.find(el => el.keyName === keyName);
+  const { number, description } = childrenComponentsMeta.find(el => el.keyName === keyName);
 
   callDispatchOnRender(renderCountsDispatch, keyName, description, number);
   return (

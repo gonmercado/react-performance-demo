@@ -12,18 +12,18 @@ class PureClassComponentWithProps extends React.PureComponent {
     hiddenCount: 0
   };
   keyName = 'comp12';
-  number = 12;
-  description = childrenComponentsMeta.find(el => el.keyName === this.keyName).description;
+  childrenMeta = childrenComponentsMeta.find(el => el.keyName === this.keyName);
 
   handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
 
   render() {
-    callDispatchOnRender(this.props.renderCountsDispatch, this.keyName, this.description, this.number);
+    const { number, description } = this.childrenMeta;
+    callDispatchOnRender(this.props.renderCountsDispatch, this.keyName, description, number);
     const { count } = this.state;
 
     return (
       <div className={ 'children' }>
-        <ComponentTitlePanel title={ this.description } number={ this.number }/>
+        <ComponentTitlePanel title={ description } number={ number }/>
         <div className={ 'button-container'}>
           <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
           <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>

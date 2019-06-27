@@ -11,8 +11,7 @@ const MemoFunctionComponentsWithProps = ({ parentProp, renderCountsDispatch }) =
   const [ hiddenCount, setHiddenCounter ] = useState(0);
 
   const keyName = 'comp16';
-  const number = 16;
-  const { description } = childrenComponentsMeta.find(el => el.keyName === keyName);
+  const { number, description } = childrenComponentsMeta.find(el => el.keyName === keyName);
 
   callDispatchOnRender(renderCountsDispatch, keyName, description, number);
   return (

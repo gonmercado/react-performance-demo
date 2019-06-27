@@ -12,7 +12,7 @@ class ClassComponentWithShouldUpdate extends React.Component {
   };
   keyName = 'comp3';
   number = 3;
-  description = childrenComponentsMeta.find(el => el.keyName === this.keyName).description;
+  childrenMeta = childrenComponentsMeta.find(el => el.keyName === this.keyName);
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     return (nextState.count !== this.state.count);
@@ -21,12 +21,14 @@ class ClassComponentWithShouldUpdate extends React.Component {
   handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
 
   render() {
-    callDispatchOnRender(this.props.renderCountsDispatch, this.keyName, this.description, this.number);
+    const { number, description } = this.childrenMeta;
+    console.log(this.childrenMeta)
+    callDispatchOnRender(this.props.renderCountsDispatch, this.keyName, description, number);
     const { count } = this.state;
 
     return (
       <div className={ 'children' }>
-        <ComponentTitlePanel title={ this.description } number={ this.number }/>
+        <ComponentTitlePanel title={ description } number={ number }/>
         <div className={ 'button-container'}>
           <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
           <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>

@@ -6,8 +6,7 @@ import { childrenComponentsMeta } from '../../shared/componentsMetaData';
 
 const FunctionComponent = ({ renderCountsDispatch }) => {
   const keyName = 'comp4';
-  const number = 4;
-  const { description } = childrenComponentsMeta.find(el => el.keyName === keyName);
+  const { number, description } = childrenComponentsMeta.find(el => el.keyName === keyName);
 
   callDispatchOnRender(renderCountsDispatch, keyName, description, number);
   return (

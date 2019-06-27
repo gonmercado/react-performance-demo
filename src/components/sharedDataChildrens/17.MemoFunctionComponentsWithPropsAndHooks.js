@@ -11,8 +11,7 @@ const MemoFunctionComponentsWithPropsAndHooks = ({ parentProp, renderCountsDispa
   const [ hiddenCount, setHiddenCounter ] = useState(0);
 
   const keyName = 'comp17';
-  const number = 17;
-  const { description } = childrenComponentsMeta.find(el => el.keyName === keyName);
+  const { number, description } = childrenComponentsMeta.find(el => el.keyName === keyName);
 
   callDispatchOnRender(renderCountsDispatch, keyName, description, number);
   const renderCounters = useMemo( () =>
