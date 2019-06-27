@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HighlightChildren from '../shared/highlightChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
-import ComponentTitlePanel from '../shared/componentTitlePanel';
 import { childrenComponentsMeta } from '../../shared/componentsMetaData';
 
 const FunctionComponentWithProps = ({ parentProp, renderCountsDispatch }) => {
@@ -11,11 +9,7 @@ const FunctionComponentWithProps = ({ parentProp, renderCountsDispatch }) => {
 
   callDispatchOnRender(renderCountsDispatch, keyName, description, number);
   return (
-    <div className={ 'children' }>
-      <ComponentTitlePanel title={ description } number={ number }/>
-      <div><p>{`Parent - ${ parentProp }`}</p></div>
-      <HighlightChildren keyName={ keyName } />
-    </div>
+    <div><p>{`Parent - ${ parentProp }`}</p></div>
   );
 };
 

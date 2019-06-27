@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CounterIncrementor from '../shared/CounterIncrementor';
 import AnotherChildren from './anotherChildren/anotherChildren';
-import HighlightChildren from '../shared/highlightChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
-import ComponentTitlePanel from '../shared/componentTitlePanel';
 import { childrenComponentsMeta } from '../../shared/componentsMetaData';
 
 class ClassComponentWithPropsAndShouldUpdateAndChildren extends React.Component {
@@ -30,15 +28,13 @@ class ClassComponentWithPropsAndShouldUpdateAndChildren extends React.Component 
     const { count } = this.state;
 
     return (
-      <div className={ 'children' }>
-        <ComponentTitlePanel title={ description } number={ number }/>
+      <>
         <div className={ 'button-container'}>
           <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
           <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
         </div>
         <AnotherChildren grandParentProp={ this.props.parentProp } renderCountsDispatch={ this.props.renderCountsDispatch } />
-        <HighlightChildren keyName={ this.keyName } />
-      </div>
+      </>
     );
   }
 }

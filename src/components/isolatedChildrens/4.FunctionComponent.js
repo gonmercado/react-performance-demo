@@ -10,10 +10,7 @@ const FunctionComponent = ({ renderCountsDispatch }) => {
 
   callDispatchOnRender(renderCountsDispatch, keyName, description, number);
   return (
-    <div className={ 'children' }>
-      <ComponentTitlePanel title={ description } number={ number }/>
-      <HighlightChildren keyName={ keyName } />
-    </div>
+    <div>Simple Functional Component</div>
   );
 };
 

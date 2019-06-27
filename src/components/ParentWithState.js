@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import CounterIncrementor from './shared/CounterIncrementor';
 import { INCREMENT_RENDER_COUNT, RESET_COUNT } from '../App';
 import { childrenComponentsMeta } from '../shared/componentsMetaData';
+import ComponentTitlePanel from './shared/componentTitlePanel';
+import HighlightChildren from './shared/highlightChildren';
 
 class ParentWithState extends React.PureComponent {
   state = {
@@ -84,7 +86,12 @@ class ParentWithState extends React.PureComponent {
                 <div className={ 'children-container'} key={ element.keyName }>
                   <input type="checkbox" checked={ element.show } onChange={ () => this.handleDisplayCompClick(element.keyName) }/> { !element.show && <label>{ element.description }</label> }
                   {
-                    element.show && <element.component renderCountsDispatch={ renderCountsDispatch } />
+                    element.show &&
+                    <div className={ 'children' }>
+                      <ComponentTitlePanel title={ element.description } number={ element.number }/>
+                      <element.component renderCountsDispatch={ renderCountsDispatch } />
+                      <HighlightChildren keyName={ element.keyName } />
+                    </div>
                   }
                 </div>
               ))
@@ -99,7 +106,13 @@ class ParentWithState extends React.PureComponent {
               this.state.childrenComponents.filter(el => el.receiveProps).map(element => (
                 <div className={ 'children-container'} key={ element.keyName }>
                   <input type="checkbox" checked={element.show} onChange={() => this.handleDisplayCompClick(element.keyName)} />{ !element.show && <label>{ element.description }</label> }
-                  {element.show && <element.component parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />}
+                  { element.show &&
+                    <div className={ 'children' }>
+                      <ComponentTitlePanel title={ element.description } number={ element.number }/>
+                      <element.component parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
+                      <HighlightChildren keyName={ element.keyName } />
+                    </div>
+                  }
                 </div>
               ))
             }

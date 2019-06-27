@@ -22,13 +22,9 @@ class PureClassComponentWithState extends React.PureComponent {
     const { count } = this.state;
 
     return (
-      <div className={ 'children' }>
-        <ComponentTitlePanel title={ description } number={ number }/>
-        <div className={ 'button-container'}>
-          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
-          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
-        </div>
-        <HighlightChildren keyName={ this.keyName } />
+      <div className={ 'button-container'}>
+        <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
+        <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
       </div>
     );
   }

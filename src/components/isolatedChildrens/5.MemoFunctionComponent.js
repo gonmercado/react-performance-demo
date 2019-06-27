@@ -10,10 +10,8 @@ const MemoFunctionComponent = ({ renderCountsDispatch }) => {
 
   callDispatchOnRender(renderCountsDispatch, keyName, description, number);
   return (
-    <div className={ 'children' }>
-      <ComponentTitlePanel title={ description } number={ number }/>
-      <HighlightChildren keyName={ keyName } />
-    </div>
+    <div>Simple Memoized Functional Component</div>
+
   );
 };
 

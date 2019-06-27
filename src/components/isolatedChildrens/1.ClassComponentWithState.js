@@ -1,8 +1,6 @@
 import React from 'react';
 import CounterIncrementor from '../shared/CounterIncrementor';
-import HighlightChildren from '../shared/highlightChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
-import ComponentTitlePanel from '../shared/componentTitlePanel';
 import { childrenComponentsMeta } from '../../shared/componentsMetaData';
 
 class ClassComponentWithState extends React.Component {
@@ -21,13 +19,9 @@ class ClassComponentWithState extends React.Component {
     const { count } = this.state;
 
     return (
-      <div className={ 'children' }>
-        <ComponentTitlePanel title={ description } number={ number }/>
-        <div className={ 'button-container'}>
-          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
-          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
-        </div>
-        <HighlightChildren keyName={ this.keyName } />
+      <div className={ 'button-container'}>
+        <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
+        <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
       </div>
     );
   }
