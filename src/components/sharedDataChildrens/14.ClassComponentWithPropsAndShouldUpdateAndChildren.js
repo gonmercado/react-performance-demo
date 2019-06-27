@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import CounterIncrementor from '../shared/CounterIncrementor';
 import AnotherChildren from './anotherChildren/anotherChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
-import { childrenComponentsMeta } from '../../shared/componentsMetaData';
 
 class ClassComponentWithPropsAndShouldUpdateAndChildren extends React.Component {
   state = {
@@ -11,7 +10,6 @@ class ClassComponentWithPropsAndShouldUpdateAndChildren extends React.Component 
     hiddenCount: 0
   };
   keyName = 'comp14';
-  childrenMeta = childrenComponentsMeta.find(el => el.keyName === this.keyName);
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     if (nextProps.parentProp !== this.props.parentProp) return true;
@@ -23,8 +21,7 @@ class ClassComponentWithPropsAndShouldUpdateAndChildren extends React.Component 
   handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
 
   render() {
-    const { number, description } = this.childrenMeta;
-    callDispatchOnRender(this.props.renderCountsDispatch, this.keyName, description, number);
+    callDispatchOnRender(this.props.renderCountsDispatch, this.keyName);
     const { count } = this.state;
 
     return (

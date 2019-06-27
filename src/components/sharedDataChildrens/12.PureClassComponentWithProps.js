@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CounterIncrementor from '../shared/CounterIncrementor';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
-import { childrenComponentsMeta } from '../../shared/componentsMetaData';
 
 class PureClassComponentWithProps extends React.PureComponent {
   state = {
@@ -10,13 +9,11 @@ class PureClassComponentWithProps extends React.PureComponent {
     hiddenCount: 0
   };
   keyName = 'comp12';
-  childrenMeta = childrenComponentsMeta.find(el => el.keyName === this.keyName);
 
   handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
 
   render() {
-    const { number, description } = this.childrenMeta;
-    callDispatchOnRender(this.props.renderCountsDispatch, this.keyName, description, number);
+    callDispatchOnRender(this.props.renderCountsDispatch, this.keyName);
     const { count } = this.state;
 
     return (

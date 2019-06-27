@@ -9,7 +9,7 @@ class AnotherChildren extends React.Component {
   description = 'Class with props';
 
   render() {
-    callDispatchOnRender(this.props.renderCountsDispatch, this.keyName, this.description, this.number);
+    callDispatchOnRender(this.props.renderCountsDispatch, this.keyName);
     return (
       <div>
         <ComponentTitlePanel title={ this.description } number={ this.number }/>

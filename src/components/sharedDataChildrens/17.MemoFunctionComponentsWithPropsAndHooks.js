@@ -2,16 +2,14 @@ import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import CounterIncrementor from '../shared/CounterIncrementor';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
-import { childrenComponentsMeta } from '../../shared/componentsMetaData';
 
 const MemoFunctionComponentsWithPropsAndHooks = ({ parentProp, renderCountsDispatch }) => {
   const [ count, setCounter ] = useState(0);
   const [ hiddenCount, setHiddenCounter ] = useState(0);
 
   const keyName = 'comp17';
-  const { number, description } = childrenComponentsMeta.find(el => el.keyName === keyName);
 
-  callDispatchOnRender(renderCountsDispatch, keyName, description, number);
+  callDispatchOnRender(renderCountsDispatch, keyName);
   const renderCounters = useMemo( () =>
     <>
       <div className={ 'button-container'}>
