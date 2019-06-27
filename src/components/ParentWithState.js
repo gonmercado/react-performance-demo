@@ -2,50 +2,58 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CounterIncrementor from './shared/CounterIncrementor';
 import { INCREMENT_RENDER_COUNT, RESET_COUNT } from '../App';
-import { displayComponentMeta, displayComponentWithPropsMeta } from '../shared/componentsMetaData';
+import { childrenComponentsMeta } from '../shared/componentsMetaData';
 
 class ParentWithState extends React.PureComponent {
   state = {
     sharedCount: 0,
     localCount: 0,
     hiddenCount: 0,
-    displayComponent: displayComponentMeta.map(el => ({ ...el, show: false })),
-    displayComponentWithProps: displayComponentWithPropsMeta.map(el => ({ ...el, show: false })),
+    childrenComponents: childrenComponentsMeta,
     displayAllComponents: false,
-    displayAllComponentsWithState: false
+    displayAllComponentsWithProps: false
   };
 
   handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
 
-  handleDisplayCompClick = pos => {
+  handleDisplayCompClick = keyName => {
     this.props.renderCountsDispatch({ type: RESET_COUNT });
     this.setState(oldState => {
-      const displayComponent = oldState.displayComponent.map(el => ({ ...el }));
-      displayComponent[pos].show = !displayComponent[pos].show;
-      return ({ displayComponent });
-    })
-  };
-
-  handleDisplayCompWithPropsClick = pos => {
-    this.setState(oldState => {
-      const displayComponentWithProps = oldState.displayComponentWithProps.map(el => ({ ...el }));
-      displayComponentWithProps[pos].show = !displayComponentWithProps[pos].show;
-      return ({ displayComponentWithProps });
+      const childrenComponents = oldState.childrenComponents.map(el => ({ ...el }));
+      const selectedChildren = childrenComponents.find(el => el.keyName === keyName);
+      selectedChildren.show = !selectedChildren.show;
+      return ({ childrenComponents });
     })
   };
 
   handleDisplayAllComponents = () => {
-    this.setState(oldState => ({
-      displayAllComponents: !oldState.displayAllComponents,
-      displayComponent: oldState.displayComponent.map(el => ({ ...el, show: !oldState.displayAllComponents }))
-    }));
+    this.setState(oldState => {
+      const childrenComponents = oldState.childrenComponents.map(el => ({ ...el }));
+      childrenComponents.forEach(el => {
+        if (!el.receiveProps) {
+          el.show = !oldState.displayAllComponents;
+        }
+      });
+      return ({
+        displayAllComponents: !oldState.displayAllComponents,
+        childrenComponents
+      })
+    });
   };
 
   handleDisplayAllComponentsWithProps = () => {
-    this.setState(oldState => ({
-      displayAllComponentsWithState: !oldState.displayAllComponentsWithState,
-      displayComponentWithProps: oldState.displayComponentWithProps.map(el => ({ ...el, show: !oldState.displayAllComponentsWithState }))
-    }));
+    this.setState(oldState => {
+      const childrenComponents = oldState.childrenComponents.map(el => ({ ...el }));
+      childrenComponents.forEach(el => {
+        if (el.receiveProps) {
+          el.show = !oldState.displayAllComponentsWithProps;
+        }
+      });
+      return ({
+        displayAllComponentsWithProps: !oldState.displayAllComponentsWithProps,
+        childrenComponents
+      })
+    });
   };
 
   render() {
@@ -72,11 +80,11 @@ class ParentWithState extends React.PureComponent {
               <h2>Childrens without props</h2>
             </div>
             {
-              this.state.displayComponent.map((element, index) => (
-                <div className={ 'children-container'} key={ index }>
-                  <input type="checkbox" checked={ element.show } onChange={ () => this.handleDisplayCompClick(index) }/> { !element.show && <label>{ element.description }</label> }
+              this.state.childrenComponents.filter(el => !el.receiveProps).map(element => (
+                <div className={ 'children-container'} key={ element.keyName }>
+                  <input type="checkbox" checked={ element.show } onChange={ () => this.handleDisplayCompClick(element.keyName) }/> { !element.show && <label>{ element.description }</label> }
                   {
-                    element.show && <element.component renderCountsDispatch={renderCountsDispatch} />
+                    element.show && <element.component renderCountsDispatch={ renderCountsDispatch } />
                   }
                 </div>
               ))
@@ -88,9 +96,9 @@ class ParentWithState extends React.PureComponent {
               <h2>Childrens with parents props</h2>
             </div>
             {
-              this.state.displayComponentWithProps.map((element, index) => (
-                <div className={ 'children-container'} key={ index }>
-                  <input type="checkbox" checked={element.show} onChange={() => this.handleDisplayCompWithPropsClick(index)} />{ !element.show && <label>{ element.description }</label> }
+              this.state.childrenComponents.filter(el => el.receiveProps).map(element => (
+                <div className={ 'children-container'} key={ element.keyName }>
+                  <input type="checkbox" checked={element.show} onChange={() => this.handleDisplayCompClick(element.keyName)} />{ !element.show && <label>{ element.description }</label> }
                   {element.show && <element.component parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />}
                 </div>
               ))

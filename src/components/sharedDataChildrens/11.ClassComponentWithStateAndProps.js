@@ -4,7 +4,7 @@ import CounterIncrementor from '../shared/CounterIncrementor';
 import HighlightChildren from '../shared/highlightChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
 import ComponentTitlePanel from '../shared/componentTitlePanel';
-import { displayComponentWithPropsMeta } from '../../shared/componentsMetaData';
+import { childrenComponentsMeta } from '../../shared/componentsMetaData';
 
 class ClassComponentWithStateAndProps extends React.Component {
   state = {
@@ -13,7 +13,7 @@ class ClassComponentWithStateAndProps extends React.Component {
   };
   keyName = 'comp11';
   number = 11;
-  description = displayComponentWithPropsMeta.find(el => el.keyName === this.keyName).description;
+  description = childrenComponentsMeta.find(el => el.keyName === this.keyName).description;
 
   handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
 

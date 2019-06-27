@@ -4,7 +4,7 @@ import CounterIncrementor from '../shared/CounterIncrementor';
 import HighlightChildren from '../shared/highlightChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
 import ComponentTitlePanel from '../shared/componentTitlePanel';
-import { displayComponentWithPropsMeta } from '../../shared/componentsMetaData';
+import { childrenComponentsMeta } from '../../shared/componentsMetaData';
 
 const MemoFunctionComponentsWithPropsAndHooks = ({ parentProp, renderCountsDispatch }) => {
   const [ count, setCounter ] = useState(0);
@@ -12,7 +12,7 @@ const MemoFunctionComponentsWithPropsAndHooks = ({ parentProp, renderCountsDispa
 
   const keyName = 'comp17';
   const number = 17;
-  const { description } = displayComponentWithPropsMeta.find(el => el.keyName === keyName);
+  const { description } = childrenComponentsMeta.find(el => el.keyName === keyName);
 
   callDispatchOnRender(renderCountsDispatch, keyName, description, number);
   const renderCounters = useMemo( () =>

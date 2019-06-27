@@ -3,7 +3,7 @@ import CounterIncrementor from '../shared/CounterIncrementor';
 import HighlightChildren from '../shared/highlightChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
 import ComponentTitlePanel from '../shared/componentTitlePanel';
-import { displayComponentMeta } from '../../shared/componentsMetaData';
+import { childrenComponentsMeta } from '../../shared/componentsMetaData';
 
 class PureClassComponentWithState extends React.PureComponent {
   state = {
@@ -12,7 +12,7 @@ class PureClassComponentWithState extends React.PureComponent {
   };
   keyName = 'comp2';
   number = 2;
-  description = displayComponentMeta.find(el => el.keyName === this.keyName).description;
+  description = childrenComponentsMeta.find(el => el.keyName === this.keyName).description;
 
   handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
 

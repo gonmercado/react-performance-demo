@@ -5,7 +5,7 @@ import AnotherChildren from './anotherChildren/anotherChildren';
 import HighlightChildren from '../shared/highlightChildren';
 import { callDispatchOnRender } from '../../shared/auditRenderHelper';
 import ComponentTitlePanel from '../shared/componentTitlePanel';
-import { displayComponentWithPropsMeta } from '../../shared/componentsMetaData';
+import { childrenComponentsMeta } from '../../shared/componentsMetaData';
 
 class ClassComponentWithPropsAndShouldUpdateAndChildren extends React.Component {
   state = {
@@ -14,7 +14,7 @@ class ClassComponentWithPropsAndShouldUpdateAndChildren extends React.Component 
   };
   keyName = 'comp14';
   number = 14;
-  description = displayComponentWithPropsMeta.find(el => el.keyName === this.keyName).description;
+  description = childrenComponentsMeta.find(el => el.keyName === this.keyName).description;
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     if (nextProps.parentProp !== this.props.parentProp) return true;
