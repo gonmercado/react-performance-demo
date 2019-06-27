@@ -30,4 +30,4 @@ export const displayComponentWithPropsMeta = [
   { component: FunctionComponentWithProps, description: 'Function with props', keyName: 'comp15' },
   { component: MemoFunctionComponentsWithProps, description: 'Memo function with props and state', keyName: 'comp16' },
   { component: MemoFunctionComponentsWithPropsAndHooks, description: 'Memo function with props, state and hooks', keyName: 'comp17' }
-]
+];
