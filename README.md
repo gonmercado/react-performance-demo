@@ -4,7 +4,7 @@
 
 Demo application to show different techniques to understand how React works with the render lifecycle (to the Virtual DOM) and how to improve react performance by reducing the calls to this lifecycle method.
 
-[Demo](https://react-performance-demo.netlify.com)
+[Go to live demo](https://react-performance-demo.netlify.com)
 
 ![](reactperformancedemo.gif)
 
