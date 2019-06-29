@@ -56,6 +56,7 @@ const App = () => {
               <h3>Introduction</h3>
               <p>Demo application to demonstrate different techniques to understand how React works with the render lifecycle (to the Virtual DOM) and how to improve react performance by reducing the calls to this lifecycle method.</p>
               <p>This was created to understand the difference techniques for Class components (Component, PureComponent, shouldComponentUpdate) and Functional components (React.memo and useMemo hook)</p>
+              <p>Please refer to the <a href="https://github.com/gonmercado/react-performance-demo/blob/master/README.md" target={ "_blank" }>Readme file</a> for a better explanation and for code snippets on the tested components.</p>
             </div>
             <div className="links">
               <a className="link" href="https://github.com/gonmercado/react-performance-demo" target="_blank">
