@@ -87,7 +87,7 @@ class ParentWithState extends React.PureComponent {
                   {
                     element.show &&
                     <div className={ 'children' }>
-                      <ComponentTitlePanel title={ element.description } number={ element.number }/>
+                      <ComponentTitlePanel title={ element.description } number={ element.number } source={ element.source }/>
                       <element.component renderCountsDispatch={ renderCountsDispatch } />
                       <HighlightChildren keyName={ element.keyName } />
                     </div>
@@ -107,7 +107,7 @@ class ParentWithState extends React.PureComponent {
                   <input type="checkbox" checked={element.show} onChange={() => this.handleDisplayCompClick(element.keyName)} />{ !element.show && <label>{ element.description }</label> }
                   { element.show &&
                     <div className={ 'children' }>
-                      <ComponentTitlePanel title={ element.description } number={ element.number }/>
+                      <ComponentTitlePanel title={ element.description } number={ element.number } source={ element.source }/>
                       <element.component parentProp={ sharedCount } renderCountsDispatch={ renderCountsDispatch } />
                       <HighlightChildren keyName={ element.keyName } />
                     </div>
