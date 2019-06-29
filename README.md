@@ -6,6 +6,8 @@ Demo application to show different techniques to understand how React works with
 
 [Demo](https://react-performance-demo.netlify.com)
 
+![](reactperformancedemo.gif)
+
 This project was created to understand better how react handles render lifecycle on different scenarios:
 
 #### `Class components`
