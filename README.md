@@ -25,9 +25,9 @@ In all the scenarios the components are tested with and without props from a par
 
 Also in this components and in the parent component there is an internal state with:
 
-* `Shared counter:` Only for the parent, its a counter that the parent shares with some of it children's. Thus causing the children to render on change.
+* `Shared counter:` Only for the parent, it's a counter that the parent shares with some of it children's. Thus causing the children to render on change.
 * `Local counter:` A counter that is shown on that component. Thus rendering the component.
-* `Hidden counter:` A counter that is incremented but never shown, so it should't be needed to render the component because of it.
+* `Hidden counter:` A counter that is incremented but never shown, so it shouldn't be needed to render the component because of it.
 
 ## Code snippet for the audited components (components without parent prop)
 
@@ -63,7 +63,7 @@ class ClassComponentWithState extends React.Component {
 
 This case won't render on parent props change, unless it consumes the prop and that prop change, but will also render on any state change.
 So it has an improvement on the performance given by the [Pure Component](https://reactjs.org/docs/react-api.html#reactpurecomponent), but yet can be improved more.
-Its important to mention that relaying on Pure component it's easy to code and to mantain.
+It's important to mention that relying on Pure component it's easy to code and to maintain.
 
 [Source file](src/components/isolatedChildrens/2.PureClassComponentWithState.js)
 ```javascript
@@ -91,7 +91,7 @@ class PureClassComponentWithState extends React.PureComponent {
 
 ### `3. Class with should update` 
 
-This case has a better performance because it explicitly says on which changes should render, with the use of the [shouldComponentUpdate](https://reactjs.org/docs/react-component.html#shouldcomponentupdate). But is the one that requires more code and also requires maintanence since it won't render on new props or state variables, regardless if they change.
+This case has a better performance because it explicitly says on which changes should render, with the use of the [shouldComponentUpdate](https://reactjs.org/docs/react-component.html#shouldcomponentupdate). But is the one that requires more code and also requires maintenance since it won't render on new props or state variables, regardless if they change.
 
 [Source file](src/components/isolatedChildrens/3.ClassComponentWithShouldUpdate.js)
 ```javascript
@@ -185,7 +185,7 @@ class ClassComponentWithStateAndProps extends React.Component {
 
 This case won't render on parent props change, unless it consumes the prop and that prop change, but will also render on any state change.
 So it has an improvement on the performance given by the [Pure Component](https://reactjs.org/docs/react-api.html#reactpurecomponent), but yet can be improved more.
-Its important to mention that relaying on Pure component it's easy to code and to mantain.
+It's important to mention that relying on Pure component it's easy to code and to maintain.
 
 [Source file](src/components/sharedDataChildrens/12.PureClassComponentWithProps.js)
 ```javascript
@@ -216,7 +216,7 @@ class PureClassComponentWithProps extends React.PureComponent {
 
 ### `13. Class with props and shouldUpdate` 
 
-This case has a better performance because it explicitly says on which changes should render, with the use of the [shouldComponentUpdate](https://reactjs.org/docs/react-component.html#shouldcomponentupdate). But is the one that requires more code and also requires maintanence since it won't render on new props or state variables, regardless if they change.
+This case has a better performance because it explicitly says on which changes should render, with the use of the [shouldComponentUpdate](https://reactjs.org/docs/react-component.html#shouldcomponentupdate). But is the one that requires more code and also requires maintenance since it won't render on new props or state variables, regardless if they change.
 
 [Source file](src/components/sharedDataChildrens/13.ClassComponentWithPropsAndShouldUpdate.js)
 ```javascript
@@ -253,7 +253,7 @@ class ClassComponentWithPropsAndShouldUpdate extends React.Component {
 
 ### `14. Class with state props and children` 
 
-This component has a children that consumes a property from his grand parent, meaning the parent of this component, but this component doesn't use that prop. Since it needs to pass down to a children. If we decide to ignore changes on that prop, we will be avoiding the children render to happen. So the options that we have if we want to avoid a render on this component we need to bypass this component with some other technique like reading directly from a context or a redux store. That way this component could ignore this prop.
+This component has a children that consumes a property from his grandparent, meaning the parent of this component, but this component does not use that prop. Since it needs to pass down to a children. If we decide to ignore changes on that prop, we will be avoiding the children render to happen. So the options that we have if we want to avoid a render on this component we need to bypass this component with some other technique like reading directly from a context or a redux store. That way this component could ignore this prop.
 
 [Source file](src/components/sharedDataChildrens/14.ClassComponentWithPropsAndShouldUpdateAndChildren.js)
 ```javascript
@@ -333,7 +333,7 @@ export default React.memo(MemoFunctionComponentsWithProps);
 
 ### `17. Memo function with props, state and hooks` 
 
-Simple functional component that is wrapped on [React.memo](https://reactjs.org/docs/react-api.html#reactmemo), will render only received parent props change. This will be the equivalent to the PureComponent improvement. Its also using the hook useMemo to memoize some variables of the state and props, to avoid unecesary render. But somehow the first time it doesn't memoize, after that it will use the memoize value.
+Simple functional component that is wrapped on [React.memo](https://reactjs.org/docs/react-api.html#reactmemo), will render only received parent props change. This will be the equivalent to the PureComponent improvement. It's also using the hook useMemo to memoize some variables of the state and props, to avoid unnecessary render. But somehow the first time it doesn't memoize, after that it will use the memoize value.
 
 [Source file](src/components/sharedDataChildrens/17.MemoFunctionComponentsWithPropsAndHooks.js)
 ```javascript
@@ -364,6 +364,12 @@ export default React.memo(MemoFunctionComponentsWithPropsAndHooks);
 
 ```
 
+
+## Help me
+If you find some problem, or you want to increment this cases, please feel free to create a PR.
+Also english is not my primary language, if you see some error there, please fix it.
+
+Thanks
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
