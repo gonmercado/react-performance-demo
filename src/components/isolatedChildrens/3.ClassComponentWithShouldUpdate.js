@@ -8,7 +8,6 @@ class ClassComponentWithShouldUpdate extends React.Component {
     hiddenCount: 0
   };
   keyName = 'comp3';
-  number = 3;
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     return (nextState.count !== this.state.count);

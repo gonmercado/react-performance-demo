@@ -32,6 +32,9 @@ Also in this components and in the parent component there is an internal state w
 ## Code snippet for the audited components
 
 ### `1. Class with State` 
+
+This case will always be rendered it has no performance improvement. Will render on the parent render, and on any state change.
+
 [Source file](src/components/isolatedChildrens/1.ClassComponentWithState.js)
 ```javascript
 class ClassComponentWithState extends React.Component {
@@ -39,7 +42,6 @@ class ClassComponentWithState extends React.Component {
     count: 0,
     hiddenCount: 0
   };
-  keyName = 'comp1';
 
   handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
 
@@ -55,6 +57,95 @@ class ClassComponentWithState extends React.Component {
   }
 }
 
+```
+
+### `2.Pure class with state` 
+
+This case won't render on parent props change, unless it consumes the prop and that prop change, but will also render on any state change.
+So it has an improvement on the performance given by the [Pure Component](https://reactjs.org/docs/react-api.html#reactpurecomponent), but yet can be improved more.
+Its important to mention that relaying on Pure component it's easy to code and to mantain.
+
+[Source file](src/components/isolatedChildrens/2.PureClassComponentWithState.js)
+```javascript
+class PureClassComponentWithState extends React.PureComponent {
+  state = {
+    count: 0,
+    hiddenCount: 0
+  };
+
+  handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
+
+  render() {
+    const { count } = this.state;
+
+    return (
+      <div className={ 'button-container'}>
+        <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
+        <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
+      </div>
+    );
+  }
+}
+
+```
+
+### `3. Class with should update` 
+
+This case has a better performance because it explicitly says on which changes should render, with the use of the [shouldComponentUpdate](https://reactjs.org/docs/react-component.html#shouldcomponentupdate). But is the one that requires more code and also requires maintanence since it won't render on new props or state variables, regardless if they change.
+
+[Source file](src/components/isolatedChildrens/3.ClassComponentWithShouldUpdate.js)
+```javascript
+class ClassComponentWithShouldUpdate extends React.Component {
+  state = {
+    count: 0,
+    hiddenCount: 0
+  };
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return (nextState.count !== this.state.count);
+  }
+
+  handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
+
+  render() {
+    const { count } = this.state;
+
+    return (
+      <div className={ 'button-container'}>
+        <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
+        <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
+      </div>
+    );
+  }
+}
+```
+
+### `4. Function without state` 
+
+Simple functional component that has no performance improvement, will render on any parent render.
+
+[Source file](src/components/isolatedChildrens/4.FunctionComponent.js)
+```javascript
+const FunctionComponent = ({ renderCountsDispatch }) => {
+  return (
+    <div className={ 'children__content' }>Simple Functional Component</div>
+  );
+};
+```
+
+### `5. Memo function without state` 
+
+Simple functional component that is wrapped on [React.memo](https://reactjs.org/docs/react-api.html#reactmemo), will render only received parent props change. This will be the equivalent to the PureComponent improvement. But will be rendering on any state change too (react hooks).
+
+[Source file](src/components/isolatedChildrens/4.FunctionComponent.js)
+```javascript
+const MemoFunctionComponent = ({ renderCountsDispatch }) => {
+  return (
+    <div className={ 'children__content'}>Simple Memoized Functional Component</div>
+  );
+};
+
+export default React.memo(MemoFunctionComponent);
 ```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
