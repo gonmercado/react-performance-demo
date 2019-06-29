@@ -6,7 +6,7 @@ const FunctionComponent = ({ renderCountsDispatch }) => {
 
   callDispatchOnRender(renderCountsDispatch, keyName);
   return (
-    <div>Simple Functional Component</div>
+    <div className={ 'children__content' }>Simple Functional Component</div>
   );
 };
 

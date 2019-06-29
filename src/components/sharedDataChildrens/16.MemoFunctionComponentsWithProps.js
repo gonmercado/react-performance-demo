@@ -16,7 +16,7 @@ const MemoFunctionComponentsWithProps = ({ parentProp, renderCountsDispatch }) =
         <CounterIncrementor onCounterIncrement={ () => setCounter( count + 1) } count={ count } name={ 'count' }/>
         <CounterIncrementor onCounterIncrement={ () => setHiddenCounter( hiddenCount + 1) } name={ 'hiddenCount' }/>
       </div>
-      <div><p>{`Parent - ${ parentProp }`}</p></div>
+      <p>{`Parent counter - ${ parentProp }`}</p>
     </>
   );
 };

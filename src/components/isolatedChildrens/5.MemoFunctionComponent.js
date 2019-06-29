@@ -6,7 +6,7 @@ const MemoFunctionComponent = ({ renderCountsDispatch }) => {
 
   callDispatchOnRender(renderCountsDispatch, keyName);
   return (
-    <div>Simple Memoized Functional Component</div>
+    <div className={ 'children__content'}>Simple Memoized Functional Component</div>
   );
 };
 

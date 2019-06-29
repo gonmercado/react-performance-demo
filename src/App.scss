@@ -1,4 +1,37 @@
+$borders_colors: #999;
+
 .App {
+    button {
+        min-width: 90px;
+        margin: 5px 0;
+        cursor: pointer;
+        padding: 7px;
+    }
+
+    p {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+header {
+    border-bottom: 1px solid $borders_colors;
+    padding: 15px;
+    h1 {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.introduction-container {
+    display: flex;
+    .introduction {
+        flex: 1;
+    }
+    .links {
+        align-self: flex-end;
+        width: 70px;
+    }
 }
 
 .app-main-content {
@@ -8,29 +41,22 @@
 .app-left-panel {
     flex: 2;
     position: relative;
-    border-bottom: 1px solid darkgray;
-}
-
-.App p {
-    display: inline-block;
-    margin: 0 20px 5px 20px;
+    border-bottom: 1px solid $borders_colors;
+    background-color: lightgray;
 }
 
 .parent {
-
-}
-
-.parent-title {
-    background-color: lightgray;
-    padding: 10px;
-    box-shadow: 0 4px 2px -2px gray;
-}
-
-.parent-title h1 {
-    color: #444;
-    font-weight: 500;
-    margin: 0 0 5px 0;
-    line-height: 18px;
+    header {
+        padding: 10px;
+        border-bottom: none;
+        h1 {
+            color: #222;
+            font-size: 26px;
+            font-weight: 400;
+            margin: 0 0 5px 0;
+            line-height: 18px;
+        }
+    }
 }
 
 .parent-container {
@@ -41,23 +67,22 @@
 .render-audit {
     min-width: 350px;
     flex: 1;
-    border-left: 1px solid darkgray;
+    border-left: 1px solid $borders_colors;
     padding: 10px;
-    border-bottom: 1px solid darkgray;
+    border-bottom: 1px solid $borders_colors;
 }
 
 .children-group {
     flex: 1;
     margin: 10px;
-    border: 1px solid darkgray;
+    border: 1px solid $borders_colors;
     background-color: #f6f6f6;
-}
-
-.children-group h2 {
-    color: #444;
-    font-weight: 500;
-    margin: 0;
-    padding: 3px 10px;
+    h2 {
+        color: #444;
+        font-weight: 500;
+        margin: 0;
+        padding: 3px 10px;
+    }
 }
 
 .children-container {
@@ -67,31 +92,35 @@
 
 .children-title {
     background-color: #d3ddfa;
-}
-
-.children-title input {
-    margin-left: 13px
-}
-
-.children-title h2 {
-    display: inline-block;
+    input {
+        margin-left: 13px
+    }
+    h2 {
+        display: inline-block;
+    }
 }
 
 .children {
     position: relative;
-    border: 1px solid darkgray;
+    border: 1px solid $borders_colors;
     border-radius: 3px;
     margin-bottom: 8px;
     background-color: #fff;
     box-shadow: 1px 1px 3px #666;
     flex: 1;
+    h3 {
+        color: #333;
+        margin: 0;
+        font-size: 15px;
+        font-weight: 500;
+    }
+    p {
+        margin: 5px;
+    }
 }
 
-.children h3 {
-    color: #333;
-    margin: 0;
-    font-size: 15px;
-    font-weight: 500;
+.children__content {
+    padding: 10px;
 }
 
 .highlight-children {
@@ -108,28 +137,26 @@
     right: 0;
 }
 
-.App button {
-    min-width: 90px;
-    margin: 5px 0;
-}
-
 .button-container {
     display: flex;
     padding: 5px;
+    p {
+        display: inline-block;
+        margin: 0 20px 5px 20px;
+    }
 }
 
 .counter-incrementer {
-    border: 1px solid darkgray;
+    border: 1px solid $borders_colors;
     padding: 0 5px;
     margin-right: 5px;
-}
-
-.counter-incrementer button {
-    display: inline-block;
-}
-
-.counter-incrementer p {
-    margin: 5px;
+    background-color: #fff;
+    button {
+        display: inline-block;
+    }
+    p {
+        margin: 5px 0 5px 5px;
+    }
 }
 
 .title-panel {
@@ -137,11 +164,10 @@
     height: 30px;
     border-bottom: 1px solid lightgray;
     background-color: #d7f3d7;
-}
-
-.title-panel h3 {
-    padding-left: 5px;
-    margin-top: 3px;
+    h3 {
+        padding-left: 5px;
+        margin-top: 3px;
+    }
 }
 
 .title-panel__number {
@@ -171,10 +197,9 @@
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border: 1px solid #333;
-}
-
-.custom-tooltip p {
-    display: block;
+    p {
+        display: block;
+    }
 }
 
 @media only screen and (max-width: 1050px)  {

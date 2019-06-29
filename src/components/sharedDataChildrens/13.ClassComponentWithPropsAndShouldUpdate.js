@@ -28,7 +28,7 @@ class ClassComponentWithPropsAndShouldUpdate extends React.Component {
           <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
           <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
         </div>
-        <div><p>{`Parent - ${ this.props.parentProp }`}</p></div>
+        <p>{`Parent counter - ${ this.props.parentProp }`}</p>
       </>
     );
   }

@@ -7,7 +7,7 @@ const FunctionComponentWithProps = ({ parentProp, renderCountsDispatch }) => {
 
   callDispatchOnRender(renderCountsDispatch, keyName);
   return (
-    <div><p>{`Parent - ${ parentProp }`}</p></div>
+    <p>{`Parent counter - ${ parentProp }`}</p>
   );
 };
 

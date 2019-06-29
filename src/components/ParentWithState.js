@@ -66,15 +66,14 @@ class ParentWithState extends React.PureComponent {
 
     return (
       <div className={ 'parent' }>
-        <div className={ 'parent-title' }>
+        <header>
           <h1>Parent component</h1>
           <div className={ 'button-container'}>
             <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ sharedCount } name={ 'sharedCount' }/>
             <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ localCount } name={ 'localCount' }/>
             <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
           </div>
-
-        </div>
+        </header>
         <div className={ 'parent-container'}>
           <div className={ 'children-group' }>
             <div className={ 'children-title' }>
