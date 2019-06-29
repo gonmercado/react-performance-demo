@@ -29,7 +29,7 @@ Also in this components and in the parent component there is an internal state w
 * `Local counter:` A counter that is shown on that component. Thus rendering the component.
 * `Hidden counter:` A counter that is incremented but never shown, so it should't be needed to render the component because of it.
 
-## Code snippet for the audited components
+## Code snippet for the audited components (components without parent prop)
 
 ### `1. Class with State` 
 
@@ -126,7 +126,7 @@ Simple functional component that has no performance improvement, will render on 
 
 [Source file](src/components/isolatedChildrens/4.FunctionComponent.js)
 ```javascript
-const FunctionComponent = ({ renderCountsDispatch }) => {
+const FunctionComponent = () => {
   return (
     <div className={ 'children__content' }>Simple Functional Component</div>
   );
@@ -137,9 +137,9 @@ const FunctionComponent = ({ renderCountsDispatch }) => {
 
 Simple functional component that is wrapped on [React.memo](https://reactjs.org/docs/react-api.html#reactmemo), will render only received parent props change. This will be the equivalent to the PureComponent improvement. But will be rendering on any state change too (react hooks).
 
-[Source file](src/components/isolatedChildrens/4.FunctionComponent.js)
+[Source file](src/components/isolatedChildrens/5.MemoFunctionComponent.js)
 ```javascript
-const MemoFunctionComponent = ({ renderCountsDispatch }) => {
+const MemoFunctionComponent = () => {
   return (
     <div className={ 'children__content'}>Simple Memoized Functional Component</div>
   );
@@ -147,6 +147,224 @@ const MemoFunctionComponent = ({ renderCountsDispatch }) => {
 
 export default React.memo(MemoFunctionComponent);
 ```
+
+## Code snippet for the audited components (components with parent prop)
+
+### `11. Class with state and props` 
+
+This case will always be rendered it has no performance improvement. Will render on the parent render, and on any state change.
+
+[Source file](src/components/sharedDataChildrens/11.ClassComponentWithStateAndProps.js)
+```javascript
+class ClassComponentWithStateAndProps extends React.Component {
+  state = {
+    count: 0,
+    hiddenCount: 0
+  };
+  keyName = 'comp11';
+
+  handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
+
+  render() {
+    const { count } = this.state;
+
+    return (
+      <>
+        <div className={ 'button-container'}>
+          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
+          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
+        </div>
+        <p>{`Parent counter - ${ this.props.parentProp }`}</p>
+      </>
+    );
+  }
+}
+```
+
+### `12. Pure class with props and state` 
+
+This case won't render on parent props change, unless it consumes the prop and that prop change, but will also render on any state change.
+So it has an improvement on the performance given by the [Pure Component](https://reactjs.org/docs/react-api.html#reactpurecomponent), but yet can be improved more.
+Its important to mention that relaying on Pure component it's easy to code and to mantain.
+
+[Source file](src/components/sharedDataChildrens/12.PureClassComponentWithProps.js)
+```javascript
+class PureClassComponentWithProps extends React.PureComponent {
+  state = {
+    count: 0,
+    hiddenCount: 0
+  };
+  keyName = 'comp12';
+
+  handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
+
+  render() {
+    const { count } = this.state;
+
+    return (
+      <>
+        <div className={ 'button-container'}>
+          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
+          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
+        </div>
+        <p>{`Parent counter - ${ this.props.parentProp }`}</p>
+      </>
+    );
+  }
+}
+```
+
+### `13. Class with props and shouldUpdate` 
+
+This case has a better performance because it explicitly says on which changes should render, with the use of the [shouldComponentUpdate](https://reactjs.org/docs/react-component.html#shouldcomponentupdate). But is the one that requires more code and also requires maintanence since it won't render on new props or state variables, regardless if they change.
+
+[Source file](src/components/sharedDataChildrens/13.ClassComponentWithPropsAndShouldUpdate.js)
+```javascript
+class ClassComponentWithPropsAndShouldUpdate extends React.Component {
+  state = {
+    count: 0,
+    hiddenCounter: 0
+  };
+  keyName = 'comp13';
+
+  handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    if (nextState.count !== this.state.count) return true;
+    if (nextProps.parentProp !== this.props.parentProp) return true;
+    return false
+  }
+
+  render() {
+    const { count } = this.state;
+
+    return (
+      <>
+        <div className={ 'button-container'}>
+          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
+          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
+        </div>
+        <p>{`Parent counter - ${ this.props.parentProp }`}</p>
+      </>
+    );
+  }
+}
+```
+
+### `14. Class with state props and children` 
+
+This component has a children that consumes a property from his grand parent, meaning the parent of this component, but this component doesn't use that prop. Since it needs to pass down to a children. If we decide to ignore changes on that prop, we will be avoiding the children render to happen. So the options that we have if we want to avoid a render on this component we need to bypass this component with some other technique like reading directly from a context or a redux store. That way this component could ignore this prop.
+
+[Source file](src/components/sharedDataChildrens/14.ClassComponentWithPropsAndShouldUpdateAndChildren.js)
+```javascript
+class ClassComponentWithPropsAndShouldUpdateAndChildren extends React.Component {
+  state = {
+    count: 0,
+    hiddenCount: 0
+  };
+  keyName = 'comp14';
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    if (nextProps.parentProp !== this.props.parentProp) return true;
+    if (nextState.count !== this.state.count) return true;
+    return false
+  }
+
+
+  handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
+
+  render() {
+    const { count } = this.state;
+
+    return (
+      <>
+        <div className={ 'button-container'}>
+          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } count={ count } name={ 'count' }/>
+          <CounterIncrementor onCounterIncrement={ this.handleIncrementCount } name={ 'hiddenCount' }/>
+        </div>
+        <AnotherChildren grandParentProp={ this.props.parentProp } renderCountsDispatch={ this.props.renderCountsDispatch } />
+      </>
+    );
+  }
+}
+```
+
+### `15. Function with props` 
+
+Simple functional component that has no performance improvement, will render on any parent render.
+
+[Source file](src/components/sharedDataChildrens/15.FunctionComponentWithProps.js)
+```javascript
+const FunctionComponentWithProps = ({ parentProp }) => {
+  return (
+    <p>{`Parent counter - ${ parentProp }`}</p>
+  );
+};
+```
+
+### `16. Memo function with state and props` 
+
+Simple functional component that is wrapped on [React.memo](https://reactjs.org/docs/react-api.html#reactmemo), will render only received parent props change. This will be the equivalent to the PureComponent improvement. But will be rendering on any state change too (react hooks).
+
+[Source file](src/components/sharedDataChildrens/16.MemoFunctionComponentsWithProps.js)
+```javascript
+const MemoFunctionComponentsWithProps = ({ parentProp }) => {
+  const [ count, setCounter ] = useState(0);
+  const [ hiddenCount, setHiddenCounter ] = useState(0);
+
+  return (
+    <>
+      <div className={ 'button-container'}>
+        <CounterIncrementor onCounterIncrement={ () => setCounter( count + 1) } count={ count } name={ 'count' }/>
+        <CounterIncrementor onCounterIncrement={ () => setHiddenCounter( hiddenCount + 1) } name={ 'hiddenCount' }/>
+      </div>
+      <p>{`Parent counter - ${ parentProp }`}</p>
+    </>
+  );
+};
+
+MemoFunctionComponentsWithProps.propTypes = {
+  parentProp: PropTypes.number.isRequired
+};
+
+export default React.memo(MemoFunctionComponentsWithProps);
+
+```
+
+### `17. Memo function with props, state and hooks` 
+
+Simple functional component that is wrapped on [React.memo](https://reactjs.org/docs/react-api.html#reactmemo), will render only received parent props change. This will be the equivalent to the PureComponent improvement. Its also using the hook useMemo to memoize some variables of the state and props, to avoid unecesary render. But somehow the first time it doesn't memoize, after that it will use the memoize value.
+
+[Source file](src/components/sharedDataChildrens/17.MemoFunctionComponentsWithPropsAndHooks.js)
+```javascript
+const MemoFunctionComponentsWithPropsAndHooks = ({ parentProp }) => {
+  const [ count, setCounter ] = useState(0);
+  const [ hiddenCount, setHiddenCounter ] = useState(0);
+
+  const renderCounters = useMemo( () =>
+    <>
+      <div className={ 'button-container'}>
+        <CounterIncrementor onCounterIncrement={ () => setCounter( count + 1) } count={ count } name={ 'count' }/>
+        <CounterIncrementor onCounterIncrement={ () => setHiddenCounter( hiddenCount + 1) } name={ 'hiddenCount' }/>
+      </div>
+      <p>{`Parent counter - ${ parentProp }`}</p>
+    </>,
+    [ count, parentProp ]
+  );
+
+  return renderCounters;
+};
+
+MemoFunctionComponentsWithPropsAndHooks.propTypes = {
+  parentProp: PropTypes.number.isRequired
+};
+
+export default React.memo(MemoFunctionComponentsWithPropsAndHooks);
+
+
+```
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

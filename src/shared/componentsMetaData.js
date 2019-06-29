@@ -21,7 +21,7 @@ export const childrenComponentsMeta = [
   { component: FunctionComponent, description: 'Function without state', keyName: 'comp4', show: false, number: 4 },
   { component: MemoFunctionComponent, description: 'Memo function without state', keyName: 'comp5', show: false, number: 5 },
   { component: ClassComponentWithStateAndProps, description: 'Class with state and props', keyName: 'comp11', receiveProps: true, show: true, number: 11 },
-  { component: PureClassComponentWithProps, description: 'Pure class with props', keyName: 'comp12', receiveProps: true, show: false, number: 12 },
+  { component: PureClassComponentWithProps, description: 'Pure class with props and state', keyName: 'comp12', receiveProps: true, show: false, number: 12 },
   { component: ClassComponentWithPropsAndShouldUpdate, description: 'Class with props and shouldUpdate', keyName: 'comp13', receiveProps: true, show: false, number: 13 },
   { component: ClassComponentWithPropsAndShouldUpdateAndChildren, description: 'Class with state props and children', keyName: 'comp14', receiveProps: true, show: false, number: 14 },
   { component: FunctionComponentWithProps, description: 'Function with props', keyName: 'comp15', receiveProps: true, show: false, number: 15 },
