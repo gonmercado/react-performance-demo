@@ -29,8 +29,30 @@ header {
         flex: 1;
     }
     .links {
-        align-self: flex-end;
+        margin-top: 30px;
+        margin-left: 20px;
         width: 70px;
+        .link {
+            &:hover {
+                background-color: #ddd;
+            }
+            background-color: #fff;
+            transition: background-color 300ms ease-in;
+            height: 80px;
+            width: 80px;
+            padding: 8px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-border-radius: 40px;
+            -moz-border-radius: 40px;
+            border-radius: 40px;
+            cursor: pointer;
+            display: block;
+        }
+    }
+    p {
+        padding-bottom: 5px;
     }
 }
 
@@ -217,5 +239,11 @@ header {
         margin: 5px;
         border: 1px solid darkgray;
         background-color: #f6f6f6;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .app-main-content {
+        flex-wrap: wrap;
     }
 }

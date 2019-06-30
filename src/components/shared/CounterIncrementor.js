@@ -5,7 +5,7 @@ const CounterIncrementor = ({ name, count, onCounterIncrement }) => {
 
   return (
     <div className={ 'counter-incrementer' }>
-      <button onClick={ () => onCounterIncrement(name) }>{ `Increment ${ name }` }</button><p>{ count }</p>
+      <button onClick={ () => onCounterIncrement(name) }>{ `Incr ${ name }` }</button><p>{ count }</p>
     </div>
   );
 };
