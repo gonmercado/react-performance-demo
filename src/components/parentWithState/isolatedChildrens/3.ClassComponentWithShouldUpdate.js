@@ -1,6 +1,6 @@
 import React from 'react';
 import CounterIncrementor from '../shared/CounterIncrementor';
-import { callDispatchOnRender } from '../../shared/auditRenderHelper';
+import { callDispatchOnRender } from '../../../sharedHelpers/auditRenderHelper';
 
 class ClassComponentWithShouldUpdate extends React.Component {
   state = {

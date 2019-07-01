@@ -1,5 +1,5 @@
 import React from 'react';
-import { callDispatchOnRender } from '../../shared/auditRenderHelper';
+import { callDispatchOnRender } from '../../../sharedHelpers/auditRenderHelper';
 
 const FunctionComponent = ({ renderCountsDispatch }) => {
   const keyName = 'comp4';

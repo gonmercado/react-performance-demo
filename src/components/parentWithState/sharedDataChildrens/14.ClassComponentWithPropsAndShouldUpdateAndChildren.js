@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CounterIncrementor from '../shared/CounterIncrementor';
 import AnotherChildren from './anotherChildren/anotherChildren';
-import { callDispatchOnRender } from '../../shared/auditRenderHelper';
+import { callDispatchOnRender } from '../../../sharedHelpers/auditRenderHelper';
 
 class ClassComponentWithPropsAndShouldUpdateAndChildren extends React.Component {
   state = {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CounterIncrementor from '../shared/CounterIncrementor';
-import { callDispatchOnRender } from '../../shared/auditRenderHelper';
+import { callDispatchOnRender } from '../../../sharedHelpers/auditRenderHelper';
 
 const MemoFunctionComponentsWithProps = ({ parentProp, renderCountsDispatch }) => {
   const [ count, setCounter ] = useState(0);

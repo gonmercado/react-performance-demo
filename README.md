@@ -37,7 +37,7 @@ Also in this components and in the parent component there is an internal state w
 
 This case will always be rendered it has no performance improvement. Will render on the parent render, and on any state change.
 
-[Source file](src/components/isolatedChildrens/1.ClassComponentWithState.js)
+[Source file](src/components/parentWithState/isolatedChildrens/1.ClassComponentWithState.js)
 ```javascript
 class ClassComponentWithState extends React.Component {
   state = {
@@ -67,7 +67,7 @@ This case won't render on parent props change, unless it consumes the prop and t
 So it has an improvement on the performance given by the [Pure Component](https://reactjs.org/docs/react-api.html#reactpurecomponent), but yet can be improved more.
 It's important to mention that relying on Pure component it's easy to code and to maintain.
 
-[Source file](src/components/isolatedChildrens/2.PureClassComponentWithState.js)
+[Source file](src/components/parentWithState/isolatedChildrens/2.PureClassComponentWithState.js)
 ```javascript
 class PureClassComponentWithState extends React.PureComponent {
   state = {
@@ -95,7 +95,7 @@ class PureClassComponentWithState extends React.PureComponent {
 
 This case has a better performance because it explicitly says on which changes should render, with the use of the [shouldComponentUpdate](https://reactjs.org/docs/react-component.html#shouldcomponentupdate). But is the one that requires more code and also requires maintenance since it won't render on new props or state variables, regardless if they change.
 
-[Source file](src/components/isolatedChildrens/3.ClassComponentWithShouldUpdate.js)
+[Source file](src/components/parentWithState/isolatedChildrens/3.ClassComponentWithShouldUpdate.js)
 ```javascript
 class ClassComponentWithShouldUpdate extends React.Component {
   state = {
@@ -126,7 +126,7 @@ class ClassComponentWithShouldUpdate extends React.Component {
 
 Simple functional component that has no performance improvement, will render on any parent render.
 
-[Source file](src/components/isolatedChildrens/4.FunctionComponent.js)
+[Source file](src/components/parentWithState/isolatedChildrens/4.FunctionComponent.js)
 ```javascript
 const FunctionComponent = () => {
   return (
@@ -139,7 +139,7 @@ const FunctionComponent = () => {
 
 Simple functional component that is wrapped on [React.memo](https://reactjs.org/docs/react-api.html#reactmemo), will render only received parent props change. This will be the equivalent to the PureComponent improvement. But will be rendering on any state change too (react hooks).
 
-[Source file](src/components/isolatedChildrens/5.MemoFunctionComponent.js)
+[Source file](src/components/parentWithState/isolatedChildrens/5.MemoFunctionComponent.js)
 ```javascript
 const MemoFunctionComponent = () => {
   return (
@@ -156,7 +156,7 @@ export default React.memo(MemoFunctionComponent);
 
 This case will always be rendered it has no performance improvement. Will render on the parent render, and on any state change.
 
-[Source file](src/components/sharedDataChildrens/11.ClassComponentWithStateAndProps.js)
+[Source file](src/components/parentWithState/sharedDataChildrens/11.ClassComponentWithStateAndProps.js)
 ```javascript
 class ClassComponentWithStateAndProps extends React.Component {
   state = {
@@ -189,7 +189,7 @@ This case won't render on parent props change, unless it consumes the prop and t
 So it has an improvement on the performance given by the [Pure Component](https://reactjs.org/docs/react-api.html#reactpurecomponent), but yet can be improved more.
 It's important to mention that relying on Pure component it's easy to code and to maintain.
 
-[Source file](src/components/sharedDataChildrens/12.PureClassComponentWithProps.js)
+[Source file](src/components/parentWithState/sharedDataChildrens/12.PureClassComponentWithProps.js)
 ```javascript
 class PureClassComponentWithProps extends React.PureComponent {
   state = {
@@ -220,7 +220,7 @@ class PureClassComponentWithProps extends React.PureComponent {
 
 This case has a better performance because it explicitly says on which changes should render, with the use of the [shouldComponentUpdate](https://reactjs.org/docs/react-component.html#shouldcomponentupdate). But is the one that requires more code and also requires maintenance since it won't render on new props or state variables, regardless if they change.
 
-[Source file](src/components/sharedDataChildrens/13.ClassComponentWithPropsAndShouldUpdate.js)
+[Source file](src/components/parentWithState/sharedDataChildrens/13.ClassComponentWithPropsAndShouldUpdate.js)
 ```javascript
 class ClassComponentWithPropsAndShouldUpdate extends React.Component {
   state = {
@@ -257,7 +257,7 @@ class ClassComponentWithPropsAndShouldUpdate extends React.Component {
 
 This component has a children that consumes a property from his grandparent, meaning the parent of this component, but this component does not use that prop. Since it needs to pass down to a children. If we decide to ignore changes on that prop, we will be avoiding the children render to happen. So the options that we have if we want to avoid a render on this component we need to bypass this component with some other technique like reading directly from a context or a redux store. That way this component could ignore this prop.
 
-[Source file](src/components/sharedDataChildrens/14.ClassComponentWithPropsAndShouldUpdateAndChildren.js)
+[Source file](src/components/parentWithState/sharedDataChildrens/14.ClassComponentWithPropsAndShouldUpdateAndChildren.js)
 ```javascript
 class ClassComponentWithPropsAndShouldUpdateAndChildren extends React.Component {
   state = {
@@ -295,7 +295,7 @@ class ClassComponentWithPropsAndShouldUpdateAndChildren extends React.Component 
 
 Simple functional component that has no performance improvement, will render on any parent render.
 
-[Source file](src/components/sharedDataChildrens/15.FunctionComponentWithProps.js)
+[Source file](src/components/parentWithState/sharedDataChildrens/15.FunctionComponentWithProps.js)
 ```javascript
 const FunctionComponentWithProps = ({ parentProp }) => {
   return (
@@ -308,7 +308,7 @@ const FunctionComponentWithProps = ({ parentProp }) => {
 
 Simple functional component that is wrapped on [React.memo](https://reactjs.org/docs/react-api.html#reactmemo), will render only received parent props change. This will be the equivalent to the PureComponent improvement. But will be rendering on any state change too (react hooks).
 
-[Source file](src/components/sharedDataChildrens/16.MemoFunctionComponentsWithProps.js)
+[Source file](src/components/parentWithState/sharedDataChildrens/16.MemoFunctionComponentsWithProps.js)
 ```javascript
 const MemoFunctionComponentsWithProps = ({ parentProp }) => {
   const [ count, setCounter ] = useState(0);
@@ -337,7 +337,7 @@ export default React.memo(MemoFunctionComponentsWithProps);
 
 Simple functional component that is wrapped on [React.memo](https://reactjs.org/docs/react-api.html#reactmemo), will render only received parent props change. This will be the equivalent to the PureComponent improvement. It's also using the hook useMemo to memoize some variables of the state and props, to avoid unnecessary render. But somehow the first time it doesn't memoize, after that it will use the memoize value.
 
-[Source file](src/components/sharedDataChildrens/17.MemoFunctionComponentsWithPropsAndHooks.js)
+[Source file](src/components/parentWithState/sharedDataChildrens/17.MemoFunctionComponentsWithPropsAndHooks.js)
 ```javascript
 const MemoFunctionComponentsWithPropsAndHooks = ({ parentProp }) => {
   const [ count, setCounter ] = useState(0);

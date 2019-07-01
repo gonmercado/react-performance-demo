@@ -1,7 +1,7 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import PropTypes from 'prop-types';
-import { RESET_COUNT } from '../App';
+import { RESET_COUNT } from '../../App';
 import CustomTooltip from "./CustomTooltip";
 
 const RenderAudit = ({ renderCounts, renderCountsDispatch }) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { callDispatchOnRender } from '../../shared/auditRenderHelper';
+import { callDispatchOnRender } from '../../../sharedHelpers/auditRenderHelper';
 
 const FunctionComponentWithProps = ({ parentProp, renderCountsDispatch }) => {
   const keyName = 'comp15';

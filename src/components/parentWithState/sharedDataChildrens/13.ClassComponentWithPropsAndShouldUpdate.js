@@ -1,16 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CounterIncrementor from '../shared/CounterIncrementor';
-import { callDispatchOnRender } from '../../shared/auditRenderHelper';
+import { callDispatchOnRender } from '../../../sharedHelpers/auditRenderHelper';
 
-class PureClassComponentWithProps extends React.PureComponent {
+class ClassComponentWithPropsAndShouldUpdate extends React.Component {
   state = {
     count: 0,
-    hiddenCount: 0
+    hiddenCounter: 0
   };
-  keyName = 'comp12';
+  keyName = 'comp13';
 
   handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    if (nextState.count !== this.state.count) return true;
+    if (nextProps.parentProp !== this.props.parentProp) return true;
+    return false
+  }
 
   render() {
     // This line is the only thing that wouldn't be on a component, it's to audit the render.
@@ -30,8 +36,8 @@ class PureClassComponentWithProps extends React.PureComponent {
   }
 }
 
-PureClassComponentWithProps.propTypes = {
+ClassComponentWithPropsAndShouldUpdate.propTypes = {
   parentProp: PropTypes.number.isRequired
-};
+}
 
-export default PureClassComponentWithProps;
+export default ClassComponentWithPropsAndShouldUpdate;

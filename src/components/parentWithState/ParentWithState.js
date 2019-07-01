@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CounterIncrementor from './shared/CounterIncrementor';
-import { INCREMENT_RENDER_COUNT, RESET_COUNT } from '../App';
-import { childrenComponentsMeta } from '../shared/componentsMetaData';
+import { INCREMENT_RENDER_COUNT, RESET_COUNT } from '../../App';
+import { childrenComponentsMeta } from '../../sharedHelpers/componentsMetaData';
 import ComponentTitlePanel from './shared/componentTitlePanel';
 import HighlightChildren from './shared/highlightChildren';
 

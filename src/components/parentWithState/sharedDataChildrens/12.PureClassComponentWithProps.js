@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CounterIncrementor from '../shared/CounterIncrementor';
-import { callDispatchOnRender } from '../../shared/auditRenderHelper';
+import { callDispatchOnRender } from '../../../sharedHelpers/auditRenderHelper';
 
-class ClassComponentWithStateAndProps extends React.Component {
+class PureClassComponentWithProps extends React.PureComponent {
   state = {
     count: 0,
     hiddenCount: 0
   };
-  keyName = 'comp11';
+  keyName = 'comp12';
 
   handleIncrementCount = name => this.setState(oldState => ({ [name]: oldState[name] + 1 }));
 
@@ -30,8 +30,8 @@ class ClassComponentWithStateAndProps extends React.Component {
   }
 }
 
-ClassComponentWithStateAndProps.propTypes = {
+PureClassComponentWithProps.propTypes = {
   parentProp: PropTypes.number.isRequired
-}
+};
 
-export default ClassComponentWithStateAndProps;
+export default PureClassComponentWithProps;

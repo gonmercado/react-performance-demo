@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import gitHubLogo from '../../assets/GitHub-Mark-32px.png';
+import gitHubLogo from '../../../assets/GitHub-Mark-32px.png';
 
 const ComponentTitlePanel = ({ number, title, source }) => (
   <div className={ 'title-panel' }>

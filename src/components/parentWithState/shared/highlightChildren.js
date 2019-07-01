@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import classNames from 'classnames';
-import { renderContext } from '../../App';
+import { renderContext } from '../../../App';
 
 const HighlightChildren = ({ keyName }) => {
   const RenderContext = useContext(renderContext);
