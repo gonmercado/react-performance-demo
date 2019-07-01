@@ -5,14 +5,11 @@ import FunctionComponent from '../components/parentWithState/isolatedChildrens/4
 import MemoFunctionComponent from '../components/parentWithState/isolatedChildrens/5.MemoFunctionComponent';
 import ClassComponentWithStateAndProps from '../components/parentWithState/sharedDataChildrens/11.ClassComponentWithStateAndProps';
 import PureClassComponentWithProps from '../components/parentWithState/sharedDataChildrens/12.PureClassComponentWithProps';
-import ClassComponentWithPropsAndShouldUpdate
-  from '../components/parentWithState/sharedDataChildrens/13.ClassComponentWithPropsAndShouldUpdate';
-import ClassComponentWithPropsAndShouldUpdateAndChildren
-  from '../components/parentWithState/sharedDataChildrens/14.ClassComponentWithPropsAndShouldUpdateAndChildren';
+import ClassComponentWithPropsAndShouldUpdate from '../components/parentWithState/sharedDataChildrens/13.ClassComponentWithPropsAndShouldUpdate';
+import ClassComponentWithPropsAndShouldUpdateAndChildren from '../components/parentWithState/sharedDataChildrens/14.ClassComponentWithPropsAndShouldUpdateAndChildren';
 import FunctionComponentWithProps from '../components/parentWithState/sharedDataChildrens/15.FunctionComponentWithProps';
 import MemoFunctionComponentsWithProps from '../components/parentWithState/sharedDataChildrens/16.MemoFunctionComponentsWithProps';
-import MemoFunctionComponentsWithPropsAndHooks
-  from '../components/parentWithState/sharedDataChildrens/17.MemoFunctionComponentsWithPropsAndHooks';
+import MemoFunctionComponentsWithPropsAndHooks from '../components/parentWithState/sharedDataChildrens/17.MemoFunctionComponentsWithPropsAndRefHook';
 
 export const childrenComponentsMeta = [
   {
@@ -100,12 +97,11 @@ export const childrenComponentsMeta = [
     source: 'https://github.com/gonmercado/react-performance-demo/blob/master/src/components/parentWithState/sharedDataChildrens/16.MemoFunctionComponentsWithProps.js'
   }, {
     component: MemoFunctionComponentsWithPropsAndHooks,
-    description: 'Memo function with props, ' +
-      'state and hooks',
+    description: 'Memo function with props, state and ref hook',
     keyName: 'comp17',
     receiveProps: true,
     show: false,
     number: 17,
-    source: 'https://github.com/gonmercado/react-performance-demo/blob/master/src/components/parentWithState/sharedDataChildrens/17.MemoFunctionComponentsWithPropsAndHooks.js'
+    source: 'https://github.com/gonmercado/react-performance-demo/blob/master/src/components/parentWithState/sharedDataChildrens/17.MemoFunctionComponentsWithPropsAndRefHook.js'
   }
 ];

@@ -335,26 +335,30 @@ export default React.memo(MemoFunctionComponentsWithProps);
 
 ### `17. Memo function with props, state and hooks` 
 
-Simple functional component that is wrapped on [React.memo](https://reactjs.org/docs/react-api.html#reactmemo), will render only received parent props change. This will be the equivalent to the PureComponent improvement. It's also using the hook useMemo to memoize some variables of the state and props, to avoid unnecessary render. But somehow the first time it doesn't memoize, after that it will use the memoize value.
+Simple functional component that is wrapped on [React.memo](https://reactjs.org/docs/react-api.html#reactmemo), will render only received parent props change. This will be the equivalent to the PureComponent improvement. It's also using the ref hook [useRef](https://reactjs.org/docs/hooks-reference.html#useref) to store the counter and not trigger a render.
 
-[Source file](src/components/parentWithState/sharedDataChildrens/17.MemoFunctionComponentsWithPropsAndHooks.js)
+[Source file](src/components/parentWithState/sharedDataChildrens/17.MemoFunctionComponentsWithPropsAndRefHook.js)
 ```javascript
-const MemoFunctionComponentsWithPropsAndHooks = ({ parentProp }) => {
-  const [ count, setCounter ] = useState(0);
-  const [ hiddenCount, setHiddenCounter ] = useState(0);
 
-  const renderCounters = useMemo( () =>
+import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
+import CounterIncrementor from '../shared/CounterIncrementor';
+
+const MemoFunctionComponentsWithPropsAndHooks = ({ parentProp, renderCountsDispatch }) => {
+  const [ count, setCounter ] = useState(0);
+  const hiddenCounter = useRef(0);
+
+  const hiddenCounterIncrement = () => hiddenCounter.current += 1;
+
+  return (
     <>
       <div className={ 'button-container'}>
         <CounterIncrementor onCounterIncrement={ () => setCounter( count + 1) } count={ count } name={ 'count' }/>
-        <CounterIncrementor onCounterIncrement={ () => setHiddenCounter( hiddenCount + 1) } name={ 'hiddenCount' }/>
+        <CounterIncrementor onCounterIncrement={ hiddenCounterIncrement } name={ 'hidden-count' } />
       </div>
       <p>{`Parent counter - ${ parentProp }`}</p>
-    </>,
-    [ count, parentProp ]
+    </>
   );
-
-  return renderCounters;
 };
 
 MemoFunctionComponentsWithPropsAndHooks.propTypes = {
