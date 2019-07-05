@@ -16,7 +16,7 @@ $borders_colors: #999;
 
 header {
     border-bottom: 1px solid $borders_colors;
-    padding: 15px;
+    padding-bottom: 15px;
     h1 {
         margin: 0;
         padding: 0;
@@ -25,6 +25,7 @@ header {
 
 .introduction-container {
     display: flex;
+    padding: 0 15px;
     .introduction {
         flex: 1;
     }
@@ -232,6 +233,15 @@ header {
     }
 }
 
+.banner-container {
+    background-color: #706ec5;
+    display: flex;
+    justify-content: space-around;
+    img {
+        height: 300px;
+    }
+}
+
 @media only screen and (max-width: 1050px)  {
     .title-panel h3 {
         padding-left: 0;
@@ -243,10 +253,21 @@ header {
         border: 1px solid darkgray;
         background-color: #f6f6f6;
     }
+
+    .banner-container {
+        img {
+            height: 200px;
+        }
+    }
 }
 
 @media only screen and (max-width: 750px) {
     .app-main-content {
         flex-wrap: wrap;
+    }
+    .banner-container {
+        img {
+            height: 150px;
+        }
     }
 }

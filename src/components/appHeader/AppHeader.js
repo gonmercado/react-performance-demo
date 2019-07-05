@@ -1,9 +1,10 @@
 import React from 'react';
 import gitHubLogo from '../../assets/GitHub-Mark-64px.png';
+import headerImg from '../../assets/perfheader.png';
 
 const AppHeader = () => (
   <>
-    <h1>React components performance demo</h1>
+    <div className={ 'banner-container'} ><img src={ headerImg } alt={ 'React Performance Demo' } /></div>
     <div className="introduction-container">
       <div className="introduction">
         <h3>Introduction</h3>
