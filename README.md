@@ -21,15 +21,15 @@ This project was created to understand better how react handles render lifecycle
 * Regular functional components
 * Functional component with a state (hooks)
 * Functional component with React.memo
-* Functional component with useMemo (hook)
+* Functional component with useRef (hook)
 
-In all the scenarios the components are tested with and without props from a parent component
+In all the scenarios the components are tested inside a parent component that for some of them will pass down properties to test this kind of scenarios too.
 
-Also in this components and in the parent component there is an internal state with:
+Also in these components and in the parent component there is an internal state with:
 
 * `Shared counter:` Only for the parent, it's a counter that the parent shares with some of it children's. Thus causing the children to render on change.
 * `Local counter:` A counter that is shown on that component. Thus rendering the component.
-* `Hidden counter:` A counter that is incremented but never shown, so it shouldn't be needed to render the component because of it.
+* `Hidden counter:` A counter that is incremented but never shown, so theorically it shouldn't be required to render the component because of it.
 
 ## Code snippet for the audited components (components without parent prop)
 
@@ -372,8 +372,8 @@ export default React.memo(MemoFunctionComponentsWithPropsAndHooks);
 
 
 ## Help me
-If you find some problem, or you want to increment this cases, please feel free to create a PR.
-Also english is not my primary language, if you see some error there, please fix it.
+If you find some problem, or you want to increment these cases, please feel free to create a PR.
+Also english is not my native language, if you see some error there, please fix it.
 
 Thanks
 
